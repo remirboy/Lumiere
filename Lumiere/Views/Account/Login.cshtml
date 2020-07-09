@@ -1,0 +1,34 @@
+﻿@model Lumiere.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<div>
+    <form method="post" asp-controller="Account" asp-action="Login">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div>
+            <label asp-for="Email">Email</label>
+            <input type="email" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div>
+            <label asp-for="Password">Password</label>
+            <input type="password" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div>
+            <input type="checkbox" asp-for="RememberMe" />
+            <label asp-for="RememberMe">Запомнить?</label>
+        </div>
+
+        <div>
+            <input type="submit" value="Войти" />
+        </div>
+    </form>
+</div>

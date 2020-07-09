@@ -1,5 +1,6 @@
 using Lumiere.Data;
 using Lumiere.Models;
+using Lumiere.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,10 @@ namespace Lumiere
             services.AddDbContext<LumiereContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<LumiereContext>();
+                .AddEntityFrameworkStores<LumiereContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

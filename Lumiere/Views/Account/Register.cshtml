@@ -1,0 +1,41 @@
+﻿@model Lumiere.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<div>
+    <form method="post" asp-controller="Account" asp-action="Register">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div>
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div>
+            <label asp-for="Email">Email</label>
+            <input type="email" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPassword">Password</label>
+            <input type="password" asp-for="NewPassword" />
+            <span asp-validation-for="NewPassword"></span>
+        </div>
+
+        <div>
+            <label asp-for="ConfirmPassword">Confirm Password</label>
+            <input type="password" asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Зарегистрироваться" />
+        </div>
+    </form>
+</div>
