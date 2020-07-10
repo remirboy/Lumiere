@@ -14,6 +14,7 @@ namespace Lumiere.Models
         public DateTime ReleaseDate { get; set; }
         public double Rating { get; set; }
         public TimeSpan Duration { get; set; }
+        public List<FilmFeedback> Feedbacks { get; set; }
         public List<FilmPoster> Posters { get; set; }
         public List<FilmTrailer> Trailers { get; set; }
     }
