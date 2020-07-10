@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lumiere.Models
 {
@@ -17,5 +15,6 @@ namespace Lumiere.Models
         public double Rating { get; set; }
         public TimeSpan Duration { get; set; }
         public List<FilmPoster> Posters { get; set; }
+        public List<FilmTrailer> Trailers { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Lumiere.Models
 {
-    public class FilmPoster
+    public class FilmTrailer
     {
         public Guid Id { get; set; }
         public string Url { get; set; }
