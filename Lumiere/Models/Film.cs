@@ -10,10 +10,11 @@ namespace Lumiere.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public int AgeLimit { get; set; }
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
-        public string Rating { get; set; }
+        public double Rating { get; set; }
         public TimeSpan Duration { get; set; }
 
     }
