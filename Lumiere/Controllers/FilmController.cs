@@ -19,9 +19,14 @@ namespace Lumiere.Controllers
             _filmRepository = filmRepository;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(Guid id)
         {
-            return View();
+            Film film = await _filmRepository.GetByIdAsync(id);
+            if (film == null)
+                return NotFound();
+
+            return View(film);
         }
 
         [HttpGet]
@@ -47,6 +52,49 @@ namespace Lumiere.Controllers
             };
 
             await _filmRepository.CreateAsync(film);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            Film film = await _filmRepository.GetByIdAsync(id);
+            if (film == null)
+                return NotFound();
+
+            FilmViewModel filmViewModel = new FilmViewModel
+            {
+                Id = film.Id,
+                Name = film.Name,
+                Description = film.Description,
+                AgeLimit = film.AgeLimit,
+                ReleaseDate = film.ReleaseDate,
+                Duration = film.Duration
+            };
+
+            return View(filmViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Update(FilmViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            Film film = new Film
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                AgeLimit = model.AgeLimit,
+                ReleaseDate = model.ReleaseDate,
+                Duration = model.Duration
+            };
+
+            await _filmRepository.UpdateAsync(film);
 
             return RedirectToAction("Index", "Home");
         }
