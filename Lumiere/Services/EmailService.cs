@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using Lumiere.Models;
+using MailKit.Net.Smtp;
 using MimeKit;
 using System.Threading.Tasks;
 
@@ -9,28 +10,24 @@ namespace Lumiere.Services
         private readonly string name;
         private readonly string login;
         private readonly string password;
-        private readonly string subject;
 
         public EmailService(string emailLogin, string emailPassword)
         {
             name = "Lumiere.ru";
             login = emailLogin;
             password = emailPassword;
-            subject = "Подтвердите ваш email aдрес для регистрации на сайте Lumiere.ru";
         }
 
-        public async Task SendEmailAsync(string userName, string toEmail, string callbackUrl)
+        public async Task SendEmailAsync(EmailMessage message)
         {
             var emailMessage = new MimeMessage();
 
-            string message = GenerateMessageBody(userName, callbackUrl);
-
             emailMessage.From.Add(new MailboxAddress(name, login));
-            emailMessage.To.Add(new MailboxAddress(userName, toEmail));
-            emailMessage.Subject = subject;
+            emailMessage.To.Add(new MailboxAddress(message.ToName, message.ToEmail));
+            emailMessage.Subject = message.Subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = message
+                Text = message.MessageBody
             };
 
             using (var client = new SmtpClient())
@@ -43,7 +40,33 @@ namespace Lumiere.Services
             }
         }
 
-        private string GenerateMessageBody(string userName, string callbackUrl)
+        public EmailMessage GetEmailConfirmMessage(string userName, string userEmail, string callbackUrl)
+        {
+            string messageBody = GenerateConfirmEmailMessageBody(userName, callbackUrl);
+
+            return new EmailMessage 
+            {
+                ToName = userName,
+                ToEmail = userEmail,
+                Subject = $"Подтвердите ваш email aдрес для регистрации на сайте {name}",
+                MessageBody = messageBody
+            };
+        }
+
+        public EmailMessage GetResetPasswordMessage(string userName, string userEmail, string callbackUrl)
+        {
+            string messageBody = GenerateResetPasswordMessageBody(callbackUrl);
+
+            return new EmailMessage
+            {
+                ToName = userName,
+                ToEmail = userEmail,
+                Subject = $"Сброс пароля на сайте {name}",
+                MessageBody = messageBody
+            };
+        }
+
+        private string GenerateConfirmEmailMessageBody(string userName, string callbackUrl)
         {
             return
                 "<div>" +
@@ -53,6 +76,11 @@ namespace Lumiere.Services
                         $"<a style = 'display: flex; padding: 1.5em; background-color: #587fcc; color: white; justify-content: center; text-decoration: none; border-radius: 25px;' href = '{callbackUrl}' > Подтверить email адрес</a>" +
                      "</div>" +
                 "</div>";
+        }
+
+        private string GenerateResetPasswordMessageBody(string callbackUrl)
+        {
+            return $"Для сброса пароля пройдите по <a href='{callbackUrl}'>этой ссылке</a>";
         }
     }
 }

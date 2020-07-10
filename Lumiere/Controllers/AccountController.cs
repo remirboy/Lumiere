@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
 using Lumiere.Services;
@@ -109,7 +106,8 @@ namespace Lumiere.Controllers
                         );
 
                     // Отправка сообщения пользователю на Email для его подтверждения.
-                    await _emailService.SendEmailAsync(user.FirstName, user.Email, callbackUrl);
+                    EmailMessage emailMessage = _emailService.GetEmailConfirmMessage(user.FirstName, user.Email, callbackUrl);
+                    await _emailService.SendEmailAsync(emailMessage);
 
                     // установка куки.
                     await _signInManager.SignInAsync(user, false);
@@ -166,6 +164,103 @@ namespace Lumiere.Controllers
             }
             else
                 return View("Error");
+        }
+
+        /// <summary>
+        /// Метод для GET запроса страницы "Забыли пароль".
+        /// </summary>
+        /// <returns>Представление "Забыли пароль" для ввода email адреса.</returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Метод для POST запроса "Забыли пароль", отправляет ссылку для сброса пароля на указанный email адрес.
+        /// </summary>
+        /// <param name="model">Модель представления "Забыли пароль".</param>
+        /// <returns>
+        /// При удачной валидации модели и пользователя возвращает представление с сообщением о удачной отправке 
+        /// письма, при неудачной - возвращает частичное представление "Забыли пароль" с ошибками.
+        /// </returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepository.GetByNameAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Пользователь с такой электронной почтой не найден.");
+                    return View(model);
+                }
+
+                bool isEmailConfirmed = await _userRepository.IsEmailConfirmedAsync(user);
+                if (isEmailConfirmed == false)
+                {
+                    ModelState.AddModelError(string.Empty, "Данная электронная почта не подтверждена пользователем.");
+                    return View(model);
+                }
+
+                var token = await _userRepository.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
+
+                EmailMessage emailMessage = _emailService.GetResetPasswordMessage(user.FirstName, model.Email, callbackUrl);
+                await _emailService.SendEmailAsync(emailMessage);
+
+                return View("ForgotPasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// Метод для GET запроса сброса пароля.
+        /// </summary>
+        /// <param name="token">Токен, сгенерированный и отправленный пользователю на указанную электронную почту.</param>
+        /// <returns>Если токен корректен, то возвращает представление сброса пароля, иначе представление с ошибками.</returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token)
+        {
+            return string.IsNullOrEmpty(token) ? View("Error") : View();
+        }
+
+        /// <summary>
+        /// Метод для POST запроса сброса пароля пользователя, устанавливает новый пароль для данного пользователя.
+        /// </summary>
+        /// <param name="model">Модель представления сброса пароля.</param>
+        /// <returns>
+        /// При удачном сбросе пароля возвращает представление с сообщением об удачном сбросе пароля, при неудачном -
+        /// представление сброса пароля с выявленными ошибками.
+        /// </returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userRepository.GetByNameAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Пользователь с такой электронной почтой не найден.");
+                return View(model);
+            }
+
+            var result = await _userRepository.ResetPasswordAsync(user, model.Token, model.NewPassword);
+            if (result.Succeeded)
+                return View("ResetPasswordConfirmation");
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
         }
     }
 }
