@@ -33,6 +33,9 @@ namespace Lumiere
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IFilmRepository, FilmRepository>();
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
+            services.AddTransient<IReservedSeatRepository, ReservedSeatRepository>();
+            services.AddTransient<ISeanceRepository, SeanceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
