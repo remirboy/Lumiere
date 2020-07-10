@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Lumiere.Models;
+using Lumiere.Repositories;
 
 namespace Lumiere.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IFilmRepository _filmRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IFilmRepository filmRepository)
         {
             _logger = logger;
+            _filmRepository = filmRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Film> films = _filmRepository.GetAll().ToList();
+            return View(films);
         }
 
         public IActionResult Privacy()
