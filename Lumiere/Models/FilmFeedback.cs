@@ -9,5 +9,7 @@ namespace Lumiere.Models
         public int Rating { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        public Guid FilmId { get; set; }
+        public Film Film { get; set; }
     }
 }

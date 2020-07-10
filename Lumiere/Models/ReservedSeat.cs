@@ -9,5 +9,7 @@ namespace Lumiere.Models
         public int SeatsNumber { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        public Guid SeanceId { get; set; }
+        public FilmSeance Seance { get; set; }
     }
 }
