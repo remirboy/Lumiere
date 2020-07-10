@@ -12,6 +12,7 @@ namespace Lumiere.Data
             Database.EnsureCreated();
         }
 
+        public DbSet<Film> Films { get; set; }
         public DbSet<ReservedSeat> ReservedSeats { get; set; }
         public DbSet<FilmFeedback> FilmFeedbacks { get; set; }
     }
