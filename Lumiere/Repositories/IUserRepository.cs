@@ -18,5 +18,8 @@ namespace Lumiere.Repositories
         Task<User> GetCurrentUser(ClaimsPrincipal currentUserClaims);
         Task<string> GenerateEmailConfirmationTokenAsync(User user);
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+        Task<bool> IsEmailConfirmedAsync(User user);
+        Task<string> GeneratePasswordResetTokenAsync(User user);
+        Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
     }
 }

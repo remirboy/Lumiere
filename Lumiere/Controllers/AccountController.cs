@@ -109,7 +109,8 @@ namespace Lumiere.Controllers
                         );
 
                     // Отправка сообщения пользователю на Email для его подтверждения.
-                    await _emailService.SendEmailAsync(user.FirstName, user.Email, callbackUrl);
+                    EmailMessage emailMessage = _emailService.GetEmailConfirmMessage(user.FirstName, user.Email, callbackUrl);
+                    await _emailService.SendEmailAsync(emailMessage);
 
                     // установка куки.
                     await _signInManager.SignInAsync(user, false);
@@ -166,6 +167,82 @@ namespace Lumiere.Controllers
             }
             else
                 return View("Error");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+
+
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepository.GetByNameAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Пользователь с такой электронной почтой не найден.");
+                    return View(model);
+                }
+
+                bool isEmailConfirmed = await _userRepository.IsEmailConfirmedAsync(user);
+                if (isEmailConfirmed == false)
+                {
+                    ModelState.AddModelError(string.Empty, "Данная электронная почта не подтверждена пользователем.");
+                    return View(model);
+                }
+
+                var token = await _userRepository.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
+
+                EmailMessage emailMessage = _emailService.GetResetPasswordMessage(user.FirstName, model.Email, callbackUrl);
+                await _emailService.SendEmailAsync(emailMessage);
+
+                return View("ForgotPasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token)
+        {
+            return string.IsNullOrEmpty(token) ? View("Error") : View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userRepository.GetByNameAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Пользователь с такой электронной почтой не найден.");
+                return View(model);
+            }
+
+            var result = await _userRepository.ResetPasswordAsync(user, model.Token, model.NewPassword);
+            if (result.Succeeded)
+                return View("ResetPasswordConfirmation");
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
         }
     }
 }

@@ -72,5 +72,20 @@ namespace Lumiere.Repositories
         {
             return await _userManager.ConfirmEmailAsync(user, token);
         }
+
+        public async Task<bool> IsEmailConfirmedAsync(User user)
+        {
+            return await _userManager.IsEmailConfirmedAsync(user);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword)
+        {
+            return await _userManager.ResetPasswordAsync(user, token, newPassword);
+        }
     }
 }
