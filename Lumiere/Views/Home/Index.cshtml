@@ -1,8 +1,31 @@
-﻿@{
+﻿@model List<Lumiere.Models.Film>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <a asp-controller="Film" asp-action="Create">Добавить новый фильм</a>
+</div>
+
+<div>
+    @foreach(Film film in Model)
+    {
+        <div class="shadow m-2 p-2">
+            <h3>@film.Name</h3>
+            <p>@film.Description</p>
+            <p>@film.AgeLimit</p>
+            <p>@film.ReleaseDate</p>
+            <p>@film.Duration</p>
+            <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id >Редактировать</a>
+            <form method="post" asp-controller="Film" asp-action="Delete">
+                <input type="hidden" asp-for=@film.Id name="id"/>
+                <input type="submit" value="Удалить" />
+            </form>
+        </div>
+    }
 </div>

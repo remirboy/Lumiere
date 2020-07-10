@@ -1,0 +1,18 @@
+﻿@model Lumiere.ViewModels.FilmViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h3>Name: @Model.Name</h3>
+
+    <span>Description:</span>
+    <p>@Model.Description</p>
+
+    <span>Age limit: @Model.AgeLimit</span>
+    <span>Release date: @Model.ReleaseDate</span>
+    <span>Duration: @Model.Duration</span>
+</div>

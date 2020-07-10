@@ -1,0 +1,49 @@
+﻿@model Lumiere.ViewModels.FilmViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+<div>
+    <form method="post" asp-controller="Film" asp-action="Update">
+        <input type="hidden" asp-for="Id"/>
+
+        <div asp-validation-summary="All"></div>
+
+        <div>
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div>
+            <label asp-for="Description">Description</label>
+            <input type="text" asp-for="Description" />
+            <span asp-validation-for="Description"></span>
+        </div>
+
+        <div>
+            <label asp-for="AgeLimit">Age limit</label>
+            <input type="number" asp-for="AgeLimit" />
+            <span asp-validation-for="AgeLimit"></span>
+        </div>
+
+        <div>
+            <label asp-for="ReleaseDate">Release date</label>
+            <input type="date" asp-for="ReleaseDate" />
+            <span asp-validation-for="ReleaseDate"></span>
+        </div>
+
+        <div>
+            <label asp-for="Duration">Duration</label>
+            <input type="time" asp-for="Duration" />
+            <span asp-validation-for="Duration"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Редактировать" />
+        </div>
+    </form>
+</div>
