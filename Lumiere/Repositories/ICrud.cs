@@ -11,6 +11,5 @@ namespace Lumiere.Repositories
         Task DeleteAsync(T entity);
         IEnumerable<T> GetAll();
         Task<T> GetByIdAsync(Guid id);
-        Task<T> GetByNameAsync(string name);
     }
 }
