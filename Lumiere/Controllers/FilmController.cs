@@ -50,5 +50,18 @@ namespace Lumiere.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            Film film = await _filmRepository.GetByIdAsync(id);
+            if (film == null)
+                return NotFound();
+
+            await _filmRepository.DeleteAsync(film);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
