@@ -17,5 +17,6 @@ namespace Lumiere.Models
         public List<FilmFeedback> Feedbacks { get; set; }
         public List<FilmPoster> Posters { get; set; }
         public List<FilmTrailer> Trailers { get; set; }
+        public List<FilmSeance> Seances { get; set; }
     }
 }
