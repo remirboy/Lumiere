@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
 using Lumiere.Services;
@@ -169,17 +166,25 @@ namespace Lumiere.Controllers
                 return View("Error");
         }
 
+        /// <summary>
+        /// Метод для GET запроса страницы "Забыли пароль".
+        /// </summary>
+        /// <returns>Представление "Забыли пароль" для ввода email адреса.</returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
-
-
-
-
             return View();
         }
 
+        /// <summary>
+        /// Метод для POST запроса "Забыли пароль", отправляет ссылку для сброса пароля на указанный email адрес.
+        /// </summary>
+        /// <param name="model">Модель представления "Забыли пароль".</param>
+        /// <returns>
+        /// При удачной валидации модели и пользователя возвращает представление с сообщением о удачной отправке 
+        /// письма, при неудачной - возвращает частичное представление "Забыли пароль" с ошибками.
+        /// </returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -213,6 +218,11 @@ namespace Lumiere.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Метод для GET запроса сброса пароля.
+        /// </summary>
+        /// <param name="token">Токен, сгенерированный и отправленный пользователю на указанную электронную почту.</param>
+        /// <returns>Если токен корректен, то возвращает представление сброса пароля, иначе представление с ошибками.</returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPassword(string token)
@@ -220,6 +230,14 @@ namespace Lumiere.Controllers
             return string.IsNullOrEmpty(token) ? View("Error") : View();
         }
 
+        /// <summary>
+        /// Метод для POST запроса сброса пароля пользователя, устанавливает новый пароль для данного пользователя.
+        /// </summary>
+        /// <param name="model">Модель представления сброса пароля.</param>
+        /// <returns>
+        /// При удачном сбросе пароля возвращает представление с сообщением об удачном сбросе пароля, при неудачном -
+        /// представление сброса пароля с выявленными ошибками.
+        /// </returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
