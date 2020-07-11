@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
+using Lumiere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumiere.Controllers
@@ -27,6 +29,50 @@ namespace Lumiere.Controllers
                 return NotFound();
 
             return View(user);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id)
+        {
+            User user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            EditProfileViewModel editProfile = new EditProfileViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                SecondName = user.SecondName,
+                DateOfBirth = user.DateOfBirth
+            };
+
+            return View(editProfile);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(EditProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            User user = new User
+            {
+                Id = model.Id,
+                FirstName = model.FirstName,
+                SecondName = model.SecondName,
+                DateOfBirth = model.DateOfBirth
+            };
+
+            IdentityResult result =  await _userRepository.UpdateAsync(user);
+            if (result.Succeeded)
+                return RedirectToAction("Index", user.Id);
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
         }
     }
 }
