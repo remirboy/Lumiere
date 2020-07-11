@@ -21,5 +21,8 @@ namespace Lumiere.Repositories
         Task<bool> IsEmailConfirmedAsync(User user);
         Task<string> GeneratePasswordResetTokenAsync(User user);
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
+        Task<IList<string>> GetRolesAsync(User user);
+        Task<IdentityResult> AddToRolesAsync(User user, IEnumerable<string> roles);
+        Task<IdentityResult> RemoveFromRolesAsync(User user, IEnumerable<string> roles);
     }
 }

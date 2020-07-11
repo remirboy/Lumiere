@@ -88,5 +88,20 @@ namespace Lumiere.Repositories
         {
             return await _userManager.ResetPasswordAsync(user, token, newPassword);
         }
+
+        public async Task<IList<string>> GetRolesAsync(User user)
+        {
+            return await _userManager.GetRolesAsync(user);
+        }
+
+        public async Task<IdentityResult> AddToRolesAsync(User user, IEnumerable<string> roles)
+        {
+            return await _userManager.AddToRolesAsync(user, roles);
+        }
+
+        public async Task<IdentityResult> RemoveFromRolesAsync(User user, IEnumerable<string> roles)
+        {
+            return await _userManager.RemoveFromRolesAsync(user, roles);
+        }
     }
 }
