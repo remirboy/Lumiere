@@ -54,17 +54,15 @@ namespace Lumiere.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            User user = new User
-            {
-                Id = model.Id,
-                FirstName = model.FirstName,
-                SecondName = model.SecondName,
-                DateOfBirth = model.DateOfBirth
-            };
+            User user = await _userRepository.GetByIdAsync(model.Id);
+
+            user.FirstName = model.FirstName;
+            user.SecondName = model.SecondName;
+            user.DateOfBirth = model.DateOfBirth;
 
             IdentityResult result =  await _userRepository.UpdateAsync(user);
             if (result.Succeeded)
-                return RedirectToAction("Index", user.Id);
+                return View("Index", user);
 
             foreach (var error in result.Errors)
                 ModelState.AddModelError(string.Empty, error.Description);
