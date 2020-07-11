@@ -103,5 +103,10 @@ namespace Lumiere.Repositories
         {
             return await _userManager.RemoveFromRolesAsync(user, roles);
         }
+
+        public async Task<bool> IsInRoleAsync(User user, string role)
+        {
+            return await _userManager.IsInRoleAsync(user, role);
+        }
     }
 }

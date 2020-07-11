@@ -39,7 +39,7 @@ namespace Lumiere.Controllers
         /// </returns>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> EditRole(string id)
         {
             // получаем пользователя
             User user = await _userRepository.GetByIdAsync(id);
@@ -72,7 +72,7 @@ namespace Lumiere.Controllers
         /// </returns>
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(string userId, List<string> roles)
+        public async Task<IActionResult> EditRole(string userId, List<string> roles)
         {
             User user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
