@@ -1,0 +1,27 @@
+﻿@model List<Lumiere.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <table>
+        <tr class="border p-1">
+            <th class="p-1">Имя</th>
+            <th class="p-1">Фамилия</th>
+            <th class="p-1">Email</th>
+            <th class="p-1"></th>
+        </tr>
+        @foreach (User user in Model)
+        {
+            <tr class="border p-1">
+                <th class="p-1">@user.FirstName</th>
+                <th class="p-1">@user.SecondName</th>
+                <th class="p-1">@user.Email</th>
+                <th class="p-1"><a asp-controller="Admin" asp-action="Edit" asp-route-id=@user.Id>Роли</a></th>
+            </tr>
+        }
+    </table>
+</div>
