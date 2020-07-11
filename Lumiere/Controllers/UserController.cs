@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
 using Lumiere.ViewModels;
@@ -73,6 +70,19 @@ namespace Lumiere.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
 
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            User user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            await _userRepository.DeleteAsync(user);
+
+            return RedirectToAction("Index", id);
         }
     }
 }
