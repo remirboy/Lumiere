@@ -19,7 +19,7 @@ namespace Lumiere.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index(string id)
+        public async Task<IActionResult> Profile(string id)
         {
             User user = await _userRepository.GetByIdAsync(id);
             if (user == null)
@@ -62,7 +62,7 @@ namespace Lumiere.Controllers
 
             IdentityResult result =  await _userRepository.UpdateAsync(user);
             if (result.Succeeded)
-                return View("Index", user);
+                return View("Profile", user);
 
             foreach (var error in result.Errors)
                 ModelState.AddModelError(string.Empty, error.Description);
@@ -80,7 +80,7 @@ namespace Lumiere.Controllers
 
             await _userRepository.DeleteAsync(user);
 
-            return RedirectToAction("Index", id);
+            return View("Profile", id);
         }
     }
 }

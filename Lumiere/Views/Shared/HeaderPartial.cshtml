@@ -22,7 +22,7 @@
             <div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a asp-controller="User" asp-action="Index" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
+                    <a asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
                         Мой профиль
                     </a>
 
