@@ -1,0 +1,36 @@
+﻿@model Lumiere.ViewModels.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<div>
+    <form method="post" asp-controller="User" asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="All"></div>
+
+        <div>
+            <label asp-for="FirstName">First name</label>
+            <input type="text" asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+
+        <div>
+            <label asp-for="SecondName">Second name</label>
+            <input type="text" asp-for="SecondName" />
+            <span asp-validation-for="SecondName"></span>
+        </div>
+
+        <div>
+            <label asp-for="DateOfBirth">Date of birth</label>
+            <input type="date" asp-for="DateOfBirth" />
+            <span asp-validation-for="DateOfBirth"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Сохранить" />
+        </div>
+    </form>
+</div>

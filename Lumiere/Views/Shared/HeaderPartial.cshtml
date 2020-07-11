@@ -1,4 +1,6 @@
-﻿<header>
+﻿@inject Lumiere.Repositories.IUserRepository _userRepository
+
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Lumiere</a>
@@ -20,6 +22,10 @@
             <div>
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <a asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
+                        Мой профиль
+                    </a>
+
                     <form method="post" asp-controller="Account" asp-action="Logout">
                         <button type="submit">Выйти</button>
                     </form>
