@@ -1,0 +1,20 @@
+﻿@model List<Lumiere.Models.Film>
+
+@{
+    ViewData["Title"] = "FilmsList";
+}
+
+<h3>FilmsList</h3>
+
+<div class="m-1" style="border: 2px solid black">
+    @foreach(Film film in Model)
+    {
+        <div class="m-1" style="border: 1px dashed black">
+            <h4>@film.Name</h4>
+            <p>@film.Description</p>
+            <p>@film.AgeLimit</p>
+            <p>@film.ReleaseDate</p>
+            <p>@film.Duration</p>
+        </div>
+    }
+</div>
