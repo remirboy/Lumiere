@@ -1,4 +1,6 @@
-﻿<header class="d-flex justify-content-around align-items-center">
+@inject Lumiere.Repositories.IUserRepository _userRepository
+                     
+<header class="d-flex justify-content-around align-items-center">
     <a asp-area="" asp-controller="Home" asp-action="Index"></a>
         <img id="logo" src="~/img/logo.png" alt="Кинотеатр Люмьер логотип">
     
@@ -16,6 +18,10 @@
     <div>
         @if (User.Identity.IsAuthenticated)
         {
+            <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
+               Мой профиль
+            </a>
+      
             <form method="post" asp-controller="Account" asp-action="Logout">
                 <i class="icofont-login pr-2"></i>
                 <button class="text-dark" type="submit">Выйти</button>
@@ -30,6 +36,5 @@
             <a class="text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
         }
     </div>
-            
 </header>
 

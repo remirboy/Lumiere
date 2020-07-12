@@ -56,11 +56,12 @@ namespace Lumiere.Repositories
             return await _userManager.FindByNameAsync(name);
         }
 
-        public async Task<User> GetCurrentUser(ClaimsPrincipal currentUserClaims)
+        public async Task<string> GetCurrentUserId(ClaimsPrincipal currentUserClaims)
         {
-            return await _context.Users
+            User currentUser = await _context.Users
                 .Include(i => i.ReservedSeats)
                 .SingleOrDefaultAsync(sod => sod.UserName == currentUserClaims.Identity.Name);
+            return currentUser.Id;
         }
 
         public async Task<string> GenerateEmailConfirmationTokenAsync(User user)

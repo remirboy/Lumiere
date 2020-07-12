@@ -1,0 +1,17 @@
+﻿@model Lumiere.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h1>Profile</h1>
+
+<div>
+    <h3>@Model.FirstName @Model.SecondName</h3>
+
+    <p>@Model.Email</p>
+
+    <p>@Model.DateOfBirth</p>
+
+    <a asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>Редактировать профиль</a>
+</div>

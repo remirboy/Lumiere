@@ -15,7 +15,7 @@ namespace Lumiere.Repositories
         IEnumerable<User> GetAll();
         Task<User> GetByIdAsync(string userId);
         Task<User> GetByNameAsync(string name);
-        Task<User> GetCurrentUser(ClaimsPrincipal currentUserClaims);
+        Task<string> GetCurrentUserId(ClaimsPrincipal currentUserClaims);
         Task<string> GenerateEmailConfirmationTokenAsync(User user);
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
         Task<bool> IsEmailConfirmedAsync(User user);
