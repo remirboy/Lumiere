@@ -30,13 +30,14 @@ namespace Lumiere.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(FilmViewModel model)
         {
             if (!ModelState.IsValid)
@@ -53,11 +54,11 @@ namespace Lumiere.Controllers
 
             await _filmRepository.CreateAsync(film);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update(Guid id)
         {
             Film film = await _filmRepository.GetByIdAsync(id);
@@ -78,7 +79,7 @@ namespace Lumiere.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update(FilmViewModel model)
         {
             if (!ModelState.IsValid)
@@ -96,11 +97,11 @@ namespace Lumiere.Controllers
 
             await _filmRepository.UpdateAsync(film);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             Film film = await _filmRepository.GetByIdAsync(id);
@@ -109,7 +110,7 @@ namespace Lumiere.Controllers
 
             await _filmRepository.DeleteAsync(film);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

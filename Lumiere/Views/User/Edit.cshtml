@@ -29,6 +29,15 @@
             <span asp-validation-for="DateOfBirth"></span>
         </div>
 
+        @if (ViewBag.CurrentUserIsAdmin)
+        {
+            <div>
+                <label asp-for="IsAdmin">Admin</label>
+                <input type="checkbox" asp-for="IsAdmin"/>
+                <span asp-validation-for="IsAdmin"></span>
+            </div>
+        }
+
         <div>
             <input type="submit" value="Сохранить" />
         </div>

@@ -1,0 +1,13 @@
+﻿@model List<Lumiere.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    @await  Component.InvokeAsync("UsersList")
+
+    @await  Component.InvokeAsync("FilmsList")
+</div>

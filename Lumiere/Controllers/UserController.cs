@@ -11,10 +11,12 @@ namespace Lumiere.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, RoleManager<IdentityRole> roleManager)
         {
             _userRepository = userRepository;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -36,13 +38,23 @@ namespace Lumiere.Controllers
             if (user == null)
                 return NotFound();
 
+            bool userIsAdmin = await _userRepository.IsInRoleAsync(user, "admin");
+
             EditProfileViewModel editProfile = new EditProfileViewModel
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
                 SecondName = user.SecondName,
-                DateOfBirth = user.DateOfBirth
+                DateOfBirth = user.DateOfBirth,
+                IsAdmin = userIsAdmin
             };
+
+            string currentUserId = await _userRepository.GetCurrentUserId(User);
+            User currentUser = await _userRepository.GetByIdAsync(currentUserId);
+            if (await _userRepository.IsInRoleAsync(currentUser, "admin"))
+                ViewBag.CurrentUserIsAdmin = true;
+            else
+                ViewBag.CurrentUserIsAdmin = false;
 
             return View(editProfile);
         }
@@ -59,6 +71,16 @@ namespace Lumiere.Controllers
             user.FirstName = model.FirstName;
             user.SecondName = model.SecondName;
             user.DateOfBirth = model.DateOfBirth;
+
+            if (model.IsAdmin)
+            {
+                await _userRepository.AddToRoleAsync(user, "admin");
+            }
+            else
+            {
+                if (await _userRepository.IsInRoleAsync(user, "admin"))
+                    await _userRepository.RemoveFromRoleAsync(user, "admin");
+            }
 
             IdentityResult result =  await _userRepository.UpdateAsync(user);
             if (result.Succeeded)
