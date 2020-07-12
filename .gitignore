@@ -509,3 +509,5 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,windows,aspnetcore
+/Lumiere/Properties/serviceDependencies.json
+/Lumiere/Properties/serviceDependencies.local.json
