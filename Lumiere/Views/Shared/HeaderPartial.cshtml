@@ -1,43 +1,40 @@
-﻿@inject Lumiere.Repositories.IUserRepository _userRepository
+@inject Lumiere.Repositories.IUserRepository _userRepository
+                     
+<header class="d-flex justify-content-around align-items-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index"></a>
+        <img id="logo" src="~/img/logo.png" alt="Кинотеатр Люмьер логотип">
+    
+    <div class="d-flex flex-column align-items-center">
+        <form class="search">
+            <input type="search" name="search" placeholder="Поиск по фильмам">
+            <button class="search-button" aria-label="Найти на сайте"></button>
+        </form>
+        <ul class="list-inline m-0 pt-2">
+            <li class="list-inline-item pr-4"><a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Афиша</a></li>|
+            <li class="list-inline-item pl-4 pr-4"><a class="text-dark">Забронировать</a></li>|
+            <li class="list-inline-item pl-4"><a href="#footer" class="text-dark">Контакты</a></li>
+        </ul>
+    </div>
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
+               Мой профиль
+            </a>
+      
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <i class="icofont-login pr-2"></i>
+                <button class="text-dark" type="submit">Выйти</button>
+            </form>
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Lumiere</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
-                        Мой профиль
-                    </a>
-
-                    <form method="post" asp-controller="Account" asp-action="Logout">
-                        <button type="submit">Выйти</button>
-                    </form>
-
-                }
-                else
-                {
-                    <a asp-controller="Account" asp-action="Login">Войти</a>
-                    <a asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
-                }
-            </div>
-        </div>
-    </nav>
+        }
+        else
+        {
+            <i class="icofont-login pr-2"></i>
+            <a class="text-dark" asp-controller="Account" asp-action="Login">Войти</a>
+            <br>
+            <a class="text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+        }
+    </div>
 </header>
 
