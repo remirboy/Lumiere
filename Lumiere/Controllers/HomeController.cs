@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Lumiere.Models;
-using Lumiere.Repositories;
 
 namespace Lumiere.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IFilmRepository _filmRepository;
 
-        public HomeController(ILogger<HomeController> logger, IFilmRepository filmRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _filmRepository = filmRepository;
         }
 
         public IActionResult Index()
         {
-            List<Film> films = _filmRepository.GetAll().ToList();
-            return View(films);
+            return View();
         }
 
         public IActionResult Privacy()

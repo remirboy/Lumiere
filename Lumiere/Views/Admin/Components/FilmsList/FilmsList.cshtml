@@ -7,6 +7,10 @@
 <h3>FilmsList</h3>
 
 <div class="m-1" style="border: 2px solid black">
+    <div>
+        <a asp-controller="Film" asp-action="Create">Добавить новый фильм</a>
+    </div>
+
     @foreach(Film film in Model)
     {
         <div class="m-1" style="border: 1px dashed black">
@@ -15,6 +19,11 @@
             <p>@film.AgeLimit</p>
             <p>@film.ReleaseDate</p>
             <p>@film.Duration</p>
+            <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id>Редактировать</a>
+            <form method="post" asp-controller="Film" asp-action="Delete">
+                <input type="hidden" asp-for=@film.Id name="id" />
+                <input type="submit" value="Удалить" />
+            </form>
         </div>
     }
 </div>
