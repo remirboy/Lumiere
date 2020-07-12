@@ -1,0 +1,33 @@
+﻿@model List<Lumiere.Models.User>
+@inject Lumiere.Repositories.IUserRepository _userRepository
+
+@{
+    ViewData["Title"] = "UsersList";
+}
+
+<h3>UsersList</h3>
+
+<div>
+    <table>
+        <tr class="border p-1">
+            <th class="p-1">Имя</th>
+            <th class="p-1">Фамилия</th>
+            <th class="p-1">Email</th>
+            <th class="p-1">Админ</th>
+        </tr>
+        @foreach (User user in Model)
+        {
+            <tr class="border p-1">
+                <th class="p-1">@user.FirstName</th>
+                <th class="p-1">@user.SecondName</th>
+                <th class="p-1">@user.Email</th>
+                <th class="p-1">
+                    @(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")
+                </th>
+                <th class="p-1">
+                    <a asp-controller="User" asp-action="Edit" asp-route-id=@user.Id >Редактировать</a>
+                </th>
+            </tr>    
+        }
+    </table>
+</div>
