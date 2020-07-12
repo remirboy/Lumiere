@@ -94,14 +94,14 @@ namespace Lumiere.Repositories
             return await _userManager.GetRolesAsync(user);
         }
 
-        public async Task<IdentityResult> AddToRolesAsync(User user, IEnumerable<string> roles)
+        public async Task<IdentityResult> AddToRoleAsync(User user, string role)
         {
-            return await _userManager.AddToRolesAsync(user, roles);
+            return await _userManager.AddToRoleAsync(user, role);
         }
 
-        public async Task<IdentityResult> RemoveFromRolesAsync(User user, IEnumerable<string> roles)
+        public async Task<IdentityResult> RemoveFromRoleAsync(User user, string role)
         {
-            return await _userManager.RemoveFromRolesAsync(user, roles);
+            return await _userManager.RemoveFromRoleAsync(user, role);
         }
 
         public async Task<bool> IsInRoleAsync(User user, string role)
