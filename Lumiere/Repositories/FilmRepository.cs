@@ -34,7 +34,7 @@ namespace Lumiere.Repositories
 
         public IEnumerable<Film> GetAll()
         {
-            return _context.Films;
+            return _context.Films.Include(i => i.Seances);
         }
 
         public async Task<Film> GetByIdAsync(Guid id)
