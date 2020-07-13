@@ -25,7 +25,7 @@
                 <input type="submit" value="Удалить" />
             </form>
 
-            <h6>Seances</h6>
+            <h4>Seances</h4>
             @foreach (FilmSeance seance in film.Seances)
             {
                 <div>
@@ -36,7 +36,7 @@
             }
 
             <div>
-                @await  Html.PartialAsync("CreateSeance")
+                @await  Html.PartialAsync("CreateSeance", new Lumiere.ViewModels.CreateSeanceViewModel())
             </div>
         </div>
     }
