@@ -34,7 +34,11 @@ namespace Lumiere.Repositories
 
         public IEnumerable<Film> GetAll()
         {
-            return _context.Films.Include(i => i.Seances);
+            return _context.Films
+                .Include(i => i.Seances)
+                .Include(i => i.Posters)
+                .Include(i => i.Trailers)
+                .Include(i => i.Feedbacks);
         }
 
         public async Task<Film> GetByIdAsync(Guid id)
