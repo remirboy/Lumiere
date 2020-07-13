@@ -24,6 +24,20 @@
                 <input type="hidden" asp-for=@film.Id name="id" />
                 <input type="submit" value="Удалить" />
             </form>
+
+            <h6>Seances</h6>
+            @foreach (FilmSeance seance in film.Seances)
+            {
+                <div>
+                    <span>@seance.Date</span>
+                    <span>@seance.Time</span>
+                    <span>@seance.Price</span>
+                </div>
+            }
+
+            <div>
+                @await  Html.PartialAsync("CreateSeance")
+            </div>
         </div>
     }
 </div>
