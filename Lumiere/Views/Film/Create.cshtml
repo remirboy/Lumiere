@@ -41,6 +41,12 @@
         </div>
 
         <div>
+            <label asp-for="TrailerUrl">Trailer url</label>
+            <input type="url" asp-for="TrailerUrl"/>
+            <span asp-validation-for="TrailerUrl"></span>
+        </div>
+
+        <div>
             <input type="submit" value="Создать" />
         </div>
     </form>

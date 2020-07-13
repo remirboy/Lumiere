@@ -16,5 +16,6 @@ namespace Lumiere.ViewModels
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public TimeSpan Duration { get; set; }
+        public string TrailerUrl { get; set; }
     }
 }
