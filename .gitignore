@@ -12,6 +12,9 @@
 *.userosscache
 *.sln.docstates
 
+# Posters
+/Lumiere/wwwroot/img/posters
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

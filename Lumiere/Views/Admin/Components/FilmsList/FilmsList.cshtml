@@ -20,6 +20,12 @@
             <p>@film.ReleaseDate</p>
             <p>@film.Duration</p>
 
+            <h4>Posters</h4>
+            @foreach(FilmPoster poster in film.Posters)
+            {
+                <img src=@poster.Url  width="100" height="100"/>
+            }
+
             <h4>Trailers</h4>
             @foreach (FilmTrailer trailer in film.Trailers)
             {
