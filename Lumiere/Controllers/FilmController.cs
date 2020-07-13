@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
@@ -13,10 +11,12 @@ namespace Lumiere.Controllers
     public class FilmController : Controller
     {
         private readonly IFilmRepository _filmRepository;
+        private readonly ITrailerRepository _trailerRepository;
 
-        public FilmController(IFilmRepository filmRepository)
+        public FilmController(IFilmRepository filmRepository, ITrailerRepository trailerRepository)
         {
             _filmRepository = filmRepository;
+            _trailerRepository = trailerRepository;
         }
 
         [HttpGet]
@@ -53,6 +53,17 @@ namespace Lumiere.Controllers
             };
 
             await _filmRepository.CreateAsync(film);
+
+            FilmTrailer trailer = new FilmTrailer
+            {
+                Url = model.TrailerUrl,
+                FilmId = film.Id
+            };
+
+            await _trailerRepository.CreateAsync(trailer);
+
+            film.Trailers.Add(trailer);
+            await _filmRepository.UpdateAsync(film);
 
             return RedirectToAction("Index", "Admin");
         }
