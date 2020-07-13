@@ -37,7 +37,7 @@ namespace Lumiere.Repositories
             return _context.Films
                 .Include(i => i.Seances)
                 .Include(i => i.Posters)
-                .Include(i => i.Trailers)
+                .Include(i => i.Trailer)
                 .Include(i => i.Feedbacks);
         }
 
@@ -45,7 +45,7 @@ namespace Lumiere.Repositories
         {
             return await _context.Films
                 .Include(i => i.Posters)
-                .Include(i => i.Trailers)
+                .Include(i => i.Trailer)
                 .Include(i => i.Seances)
                 .Include(i => i.Feedbacks)
                 .SingleOrDefaultAsync(sod => sod.Id == id);
@@ -55,7 +55,7 @@ namespace Lumiere.Repositories
         {
             return await _context.Films
                 .Include(i => i.Posters)
-                .Include(i => i.Trailers)
+                .Include(i => i.Trailer)
                 .Include(i => i.Seances)
                 .Include(i => i.Feedbacks)
                 .SingleOrDefaultAsync(sod => sod.Name == name);

@@ -7,8 +7,8 @@
 <h1>Update</h1>
 
 <div>
-    <form method="post" asp-controller="Film" asp-action="Update">
-        <input type="hidden" asp-for="Id"/>
+    <form enctype="multipart/form-data" method="post" asp-controller="Film" asp-action="Update">
+        <input type="hidden" asp-for="Id" />
 
         <div asp-validation-summary="All"></div>
 
@@ -40,6 +40,16 @@
             <label asp-for="Duration">Duration</label>
             <input type="time" asp-for="Duration" />
             <span asp-validation-for="Duration"></span>
+        </div>
+
+        <div>
+            <label asp-for="TrailerUrl">Trailer url</label>
+            <input type="url" asp-for="TrailerUrl" />
+            <span asp-validation-for="TrailerUrl"></span>
+        </div>
+
+        <div>
+            <input type="file" accept="image/*" multiple name="posters" />
         </div>
 
         <div>
