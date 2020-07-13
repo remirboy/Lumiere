@@ -19,6 +19,19 @@
             <p>@film.AgeLimit</p>
             <p>@film.ReleaseDate</p>
             <p>@film.Duration</p>
+
+            <h4>Posters</h4>
+            @foreach(FilmPoster poster in film.Posters)
+            {
+                <img src=@poster.Url  width="100" height="100"/>
+            }
+
+            <h4>Trailers</h4>
+            @foreach (FilmTrailer trailer in film.Trailers)
+            {
+                <p>@trailer.Url</p>
+            }
+
             <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id>Редактировать</a>
             <form method="post" asp-controller="Film" asp-action="Delete">
                 <input type="hidden" asp-for=@film.Id name="id" />
@@ -33,14 +46,14 @@
                     <span>@seance.Time</span>
                     <span>@seance.Price</span>
                     <form method="post" asp-controller="Seance" asp-action="Delete">
-                        <input type="hidden" asp-for=@seance.Id name="id"/>
-                        <input type="submit" value="Удалить"/>
+                        <input type="hidden" asp-for=@seance.Id name="id" />
+                        <input type="submit" value="Удалить" />
                     </form>
                 </div>
             }
 
             <div>
-                @await  Html.PartialAsync("CreateSeance", new Lumiere.ViewModels.CreateSeanceViewModel() { FilmId = film.Id })
+                @await Html.PartialAsync("CreateSeance", new Lumiere.ViewModels.CreateSeanceViewModel() { FilmId = film.Id })
             </div>
         </div>
     }

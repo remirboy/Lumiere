@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
 using Lumiere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumiere.Controllers
@@ -13,10 +15,16 @@ namespace Lumiere.Controllers
     public class FilmController : Controller
     {
         private readonly IFilmRepository _filmRepository;
+        private readonly ITrailerRepository _trailerRepository;
+        private readonly IWebHostEnvironment _appEnvironment;
+        private readonly IPosterRepository _posterRepository;
 
-        public FilmController(IFilmRepository filmRepository)
+        public FilmController(IFilmRepository filmRepository, ITrailerRepository trailerRepository, IWebHostEnvironment appEnvironment, IPosterRepository posterRepository)
         {
             _filmRepository = filmRepository;
+            _trailerRepository = trailerRepository;
+            _appEnvironment = appEnvironment;
+            _posterRepository = posterRepository;
         }
 
         [HttpGet]
@@ -38,7 +46,7 @@ namespace Lumiere.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Create(FilmViewModel model)
+        public async Task<IActionResult> Create(FilmViewModel model, IFormFileCollection posters)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -51,8 +59,20 @@ namespace Lumiere.Controllers
                 ReleaseDate = model.ReleaseDate,
                 Duration = model.Duration
             };
-
             await _filmRepository.CreateAsync(film);
+
+            FilmTrailer trailer = new FilmTrailer
+            {
+                Url = model.TrailerUrl,
+                FilmId = film.Id
+            };
+            await _trailerRepository.CreateAsync(trailer);
+            film.Trailers.Add(trailer);
+
+            List<FilmPoster> filmPosters = await SavePosters(film.Id, posters);
+            film.Posters.AddRange(filmPosters);
+
+            await _filmRepository.UpdateAsync(film);
 
             return RedirectToAction("Index", "Admin");
         }
@@ -111,6 +131,31 @@ namespace Lumiere.Controllers
             await _filmRepository.DeleteAsync(film);
 
             return RedirectToAction("Index", "Admin");
+        }
+
+        private async Task<List<FilmPoster>> SavePosters(Guid filmId, IFormFileCollection posters)
+        {
+            List<FilmPoster> filmPosters = new List<FilmPoster>();
+            Guid posterId = Guid.NewGuid();
+            foreach (var image in posters)
+            {
+                using (var fileStream = new FileStream($"{_appEnvironment.WebRootPath}/img/posters/poster_{posterId}.png", FileMode.Create, FileAccess.Write))
+                {
+                    image.CopyTo(fileStream);
+
+                    FilmPoster filmPoster = new FilmPoster
+                    {
+                        Url = $"/img/posters/poster_{posterId}.png",
+                        FilmId = filmId
+                    };
+                    await _posterRepository.CreateAsync(filmPoster);
+
+                    filmPosters.Add(filmPoster);
+                }
+                posterId = Guid.NewGuid();
+            }
+
+            return filmPosters;
         }
     }
 }

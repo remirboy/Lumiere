@@ -36,6 +36,8 @@ namespace Lumiere
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddTransient<IReservedSeatRepository, ReservedSeatRepository>();
             services.AddTransient<ISeanceRepository, SeanceRepository>();
+            services.AddTransient<ITrailerRepository, TrailerRepository>();
+            services.AddTransient<IPosterRepository, PosterRepository>();
             services.AddSingleton(Configuration);
         }
 

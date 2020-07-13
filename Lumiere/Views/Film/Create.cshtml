@@ -7,7 +7,7 @@
 <h1>Create</h1>
 
 <div>
-    <form method="post" asp-controller="Film" asp-action="Create">
+    <form enctype="multipart/form-data" method="post" asp-controller="Film" asp-action="Create">
         <div asp-validation-summary="All"></div>
 
         <div>
@@ -38,6 +38,16 @@
             <label asp-for="Duration">Duration</label>
             <input type="time" asp-for="Duration" />
             <span asp-validation-for="Duration"></span>
+        </div>
+
+        <div>
+            <label asp-for="TrailerUrl">Trailer url</label>
+            <input type="url" asp-for="TrailerUrl"/>
+            <span asp-validation-for="TrailerUrl"></span>
+        </div>
+
+        <div>
+            <input type="file" accept="image/*" multiple name="posters"/>
         </div>
 
         <div>
