@@ -100,20 +100,31 @@ namespace Lumiere.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Update(FilmViewModel model)
+        public async Task<IActionResult> Update(FilmViewModel model, IFormFileCollection posters)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            Film film = new Film
+            Film film = await _filmRepository.GetByIdAsync(model.Id);
+
+            film.Id = model.Id;
+            film.Name = model.Name;
+            film.Description = model.Description;
+            film.AgeLimit = model.AgeLimit;
+            film.ReleaseDate = model.ReleaseDate;
+            film.Duration = model.Duration;
+
+            film.Trailers = new List<FilmTrailer> 
             {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                AgeLimit = model.AgeLimit,
-                ReleaseDate = model.ReleaseDate,
-                Duration = model.Duration
+                new FilmTrailer
+                {
+                    Url = model.TrailerUrl,
+                    FilmId = film.Id
+                }
             };
+
+            List<FilmPoster> filmPosters = await SavePostersImages(film.Id, posters);
+            film.Posters.AddRange(filmPosters);
 
             await _filmRepository.UpdateAsync(film);
 
