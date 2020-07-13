@@ -69,7 +69,7 @@ namespace Lumiere.Controllers
             await _trailerRepository.CreateAsync(trailer);
             film.Trailers.Add(trailer);
 
-            List<FilmPoster> filmPosters = await SavePosters(film.Id, posters);
+            List<FilmPoster> filmPosters = await SavePostersImages(film.Id, posters);
             film.Posters.AddRange(filmPosters);
 
             await _filmRepository.UpdateAsync(film);
@@ -128,12 +128,17 @@ namespace Lumiere.Controllers
             if (film == null)
                 return NotFound();
 
+            foreach(FilmPoster poster in film.Posters)
+            {
+                DeletePosterImage(poster.Url);
+            }
+
             await _filmRepository.DeleteAsync(film);
 
             return RedirectToAction("Index", "Admin");
         }
 
-        private async Task<List<FilmPoster>> SavePosters(Guid filmId, IFormFileCollection posters)
+        private async Task<List<FilmPoster>> SavePostersImages(Guid filmId, IFormFileCollection posters)
         {
             List<FilmPoster> filmPosters = new List<FilmPoster>();
             Guid posterId = Guid.NewGuid();
@@ -156,6 +161,18 @@ namespace Lumiere.Controllers
             }
 
             return filmPosters;
+        }
+
+        private void DeletePosterImage(string posterUrl)
+        {
+            try
+            {
+                System.IO.File.Delete(_appEnvironment.WebRootPath + posterUrl);
+            }
+            catch (DirectoryNotFoundException dirNotFound)
+            {
+                throw new Exception(dirNotFound.Message);
+            }
         }
     }
 }
