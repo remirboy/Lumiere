@@ -10,10 +10,12 @@ namespace Lumiere.Controllers
     public class SeanceController : Controller
     {
         private readonly IFilmRepository _filmRepository;
+        private readonly ISeanceRepository _seanceRepository;
 
-        public SeanceController(IFilmRepository filmRepository)
+        public SeanceController(IFilmRepository filmRepository, ISeanceRepository seanceRepository)
         {
             _filmRepository = filmRepository;
+            _seanceRepository = seanceRepository;
         }
 
         [HttpPost]
@@ -29,9 +31,21 @@ namespace Lumiere.Controllers
                 ModelState.AddModelError(string.Empty, "Фильм не найден.");
                 return PartialView(model);
             }
-                
 
-            return PartialView();
+            FilmSeance seance = new FilmSeance
+            {
+                Date = model.Date,
+                Time = model.Time,
+                Price = model.Price,
+                FilmId = model.FilmId
+            };
+
+            await _seanceRepository.CreateAsync(seance);
+
+            film.Seances.Add(seance);
+            await _filmRepository.UpdateAsync(film);
+
+            return RedirectToAction("Index", "Admin");
         }
     }
 }
