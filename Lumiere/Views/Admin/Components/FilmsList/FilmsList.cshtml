@@ -32,6 +32,10 @@
                     <span>@seance.Date</span>
                     <span>@seance.Time</span>
                     <span>@seance.Price</span>
+                    <form method="post" asp-controller="Seance" asp-action="Delete">
+                        <input type="hidden" asp-for=@seance.Id name="id"/>
+                        <input type="submit" value="Удалить"/>
+                    </form>
                 </div>
             }
 

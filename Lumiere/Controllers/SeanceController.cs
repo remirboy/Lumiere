@@ -3,6 +3,7 @@ using Lumiere.Repositories;
 using Lumiere.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Lumiere.Controllers
@@ -44,6 +45,19 @@ namespace Lumiere.Controllers
 
             film.Seances.Add(seance);
             await _filmRepository.UpdateAsync(film);
+
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            FilmSeance seance = await _seanceRepository.GetByIdAsync(id);
+            if (seance == null)
+                return NotFound();
+
+            await _seanceRepository.DeleteAsync(seance);
 
             return RedirectToAction("Index", "Admin");
         }
