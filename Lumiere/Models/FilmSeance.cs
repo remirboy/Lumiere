@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lumiere.Models
 {
@@ -19,5 +17,10 @@ namespace Lumiere.Models
         public Guid FilmId { get; set; }
         public Film Film { get; set; }
         public List<ReservedSeat> ReservedSeats { get; set; }
+
+        public FilmSeance()
+        {
+            ReservedSeats = new List<ReservedSeat>();
+        }
     }
 }

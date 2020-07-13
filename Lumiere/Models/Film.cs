@@ -18,5 +18,13 @@ namespace Lumiere.Models
         public List<FilmPoster> Posters { get; set; }
         public List<FilmTrailer> Trailers { get; set; }
         public List<FilmSeance> Seances { get; set; }
+
+        public Film()
+        {
+            Feedbacks = new List<FilmFeedback>();
+            Posters = new List<FilmPoster>();
+            Trailers = new List<FilmTrailer>();
+            Seances = new List<FilmSeance>();
+        }
     }
 }
