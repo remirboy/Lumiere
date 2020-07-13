@@ -26,11 +26,8 @@
                 <img src=@poster.Url  width="100" height="100"/>
             }
 
-            <h4>Trailers</h4>
-            @foreach (FilmTrailer trailer in film.Trailers)
-            {
-                <p>@trailer.Url</p>
-            }
+            <h4>Trailer</h4>
+            <p>@film.Trailer.Url</p>
 
             <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id>Редактировать</a>
             <form method="post" asp-controller="Film" asp-action="Delete">

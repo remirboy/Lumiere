@@ -16,14 +16,14 @@ namespace Lumiere.Models
         public TimeSpan Duration { get; set; }
         public List<FilmFeedback> Feedbacks { get; set; }
         public List<FilmPoster> Posters { get; set; }
-        public List<FilmTrailer> Trailers { get; set; }
+        public FilmTrailer Trailer { get; set; }
         public List<FilmSeance> Seances { get; set; }
 
         public Film()
         {
             Feedbacks = new List<FilmFeedback>();
             Posters = new List<FilmPoster>();
-            Trailers = new List<FilmTrailer>();
+            Trailer = new FilmTrailer();
             Seances = new List<FilmSeance>();
         }
     }
