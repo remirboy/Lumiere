@@ -31,9 +31,13 @@
                     <span class="text-dark mb-5">Длительность: @Model.Duration.ToString("t")</span>
                     <span class="h6">Сеансы сегодня, @DateTime.Today.ToString("m"):</span>
                     <div class="d-flex justify-content-around">
-                        <span class="h6 mr-1">12:20</span>
-                        <span class="h6 mr-1">14:50</span>
-                        <span class="h6 mr-1">17:10</span>
+                        @foreach (FilmSeance seance in Model.Seances)
+                        {
+                            if (seance.Date == DateTime.Today)
+                            {
+                                <span class="h6 mr-1">@seance.Time.ToString("t")</span>
+                            }
+                        }
                     </div>
                     <button type="button" class="btn btn-warning align-self-center mt-5">
                         <i class="icofont-film pr-2"></i>

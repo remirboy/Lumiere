@@ -10,7 +10,10 @@
             </a>
 
             @foreach(FilmSeance seance in Model.Seances) {
-                <span class="card-text">@seance.Time.ToString("t")</span>
+                if (seance.Date == DateTime.Today)
+                {
+                    <span class="card-text">@seance.Time.ToString("t")</span> 
+                }
             }
         </div>
     </div>
