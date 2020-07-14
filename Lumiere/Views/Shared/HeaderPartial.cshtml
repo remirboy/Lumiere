@@ -1,43 +1,4 @@
 @inject Lumiere.Repositories.IUserRepository _userRepository
-@*
-<header class="d-flex justify-content-around align-items-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index"></a>
-    <img id="logo" src="~/img/logo.png" alt="Кинотеатр Люмьер логотип">
-
-    <div class="d-flex flex-column align-items-center">
-        <form class="search">
-            <input type="search" name="search" placeholder="Поиск по фильмам">
-            <button class="search-button" aria-label="Найти на сайте"></button>
-        </form>
-        <ul class="list-inline m-0 pt-2">
-            <li class="list-inline-item pr-4"><a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Афиша</a></li>|
-            <li class="list-inline-item pl-4 pr-4"><a class="text-dark">Забронировать</a></li>|
-            <li class="list-inline-item pl-4"><a href="#footer" class="text-dark">Контакты</a></li>
-        </ul>
-    </div>
-    <div>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
-                Мой профиль
-            </a>
-
-            <form method="post" asp-controller="Account" asp-action="Logout">
-                <i class="icofont-login pr-2"></i>
-                <button class="text-dark" type="submit">Выйти</button>
-            </form>
-
-        }
-        else
-        {
-            <i class="icofont-login pr-2"></i>
-            <a class="text-dark" asp-controller="Account" asp-action="Login">Войти</a>
-            <br>
-            <a class="text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
-        }
-    </div>
-</header>
-    *@
 
     <header class="d-flex container-sm sticky-top justify-content-around align-items-center">
         <img src="/img/logo.png" alt="Кинотеатр Люмьер логотип" id="logo">
@@ -74,16 +35,14 @@
         }
         else
         {
-            <button id="auth--button">
-                <a href="#" class="text-dark">
+            <button id="auth--button" class="text-dark">
                     <i class="icofont-login pr-2"></i>
                     Войти
-                </a>
-                <br>
-                <a class="text-dark" asp-controller="Account" asp-action="Register">
-                    Регистрация
-                </a>
             </button>
+            <br>
+            <a class="text-dark" asp-controller="Account" asp-action="Register">
+                Регистрация
+            </a>
         }
     </header>
 
@@ -95,32 +54,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <form class="p-4" name="registration" method="post" action="auth/process" id="form">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="email" name="email" required class="form-control" placeholder="example@gmail.com" aria-label="Username" aria-describedby="basic-addon1"
-                               onblur="valid(document.getElementById('form'))">
-                        <span id="email_help" class="form-text text-muted"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Пароль</label>
-                        <input required type="password" name="password" id="password" class="form-control" onblur="valid(document.getElementById('form'))">
-                        <span id="password_help" class="form-text text-muted"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Запомнить меня
-                        </label>
-                    </div>
-                    <br>
-                    <button id="loginButton" type="submit" class="btn btn-secondary" onclick="valid(document.getElementById('form'))">Вход</button>
-                    <a href="./register.html" class="btn btn-secondary">Регистрация</a>
-                    <br>
-                    <button type="button" class="btn btn-link">Забыли пароль?</button>
-                </form>
+                @await  Html.PartialAsync("../Account/Login.cshtml", new Lumiere.ViewModels.LoginViewModel())
             </div>
         </div>
     </div>
