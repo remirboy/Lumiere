@@ -4,15 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<main id="container--register">
+    <div class="container w-75 pl-5 pr-5 pb-4">
+        <!-- title container -->
+        <div class="d-flex justify-content-between">
+            <i class="icofont-home left-corner mr-5"></i>
+            <h4 class="text-center mb-4">@Model.Name @Model.AgeLimit+</h4>
+            <i class="icofont-pencil-alt-2 right-corner ml-5"></i>
+        </div>
+        <hr class="mb-0">
 
-<div>
-    <h3>Name: @Model.Name</h3>
-
-    <span>Description:</span>
-    <p>@Model.Description</p>
-
-    <span>Age limit: @Model.AgeLimit</span>
-    <span>Release date: @Model.ReleaseDate</span>
-    <span>Duration: @Model.Duration</span>
-</div>
+        <div class="row pt-4 mb-4 bg-gradient">
+            <!-- left trailer column -->
+            <div class="col col-lg-8">
+                <div class="text-center mb-4">
+                    <span class="h5">Трейлер</span>
+                </div>
+                <iframe width="100" height="315" src=@Model.Trailer.Url frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <!-- right details column -->
+            <div class="col pl-4">
+                <div class="d-flex flex-column mb-4 text-center justify-content-between">
+                    <span class="h5 mb-4">Описание</span>
+                    <span class="text-dark mb-3">драма, приключение, семейный</span>
+                    <span class="text-dark">Формат: 2D</span>
+                    <span class="text-dark mb-5">Длительность: @Model.Duration.ToString("t")</span>
+                    <span class="h6">Сеансы сегодня, @DateTime.Today.ToString("m"):</span>
+                    <div class="d-flex justify-content-around">
+                        <span class="h6 mr-1">12:20</span>
+                        <span class="h6 mr-1">14:50</span>
+                        <span class="h6 mr-1">17:10</span>
+                    </div>
+                    <button type="button" class="btn btn-warning align-self-center mt-5">
+                        <i class="icofont-film pr-2"></i>
+                        Забронировать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- movie description -->
+        <div class="row text-center pl-5 pr-5 h5">
+            @Model.Description
+        </div>
+    </div>
+</main>
+<hr>
