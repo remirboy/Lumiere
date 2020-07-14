@@ -4,38 +4,64 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+<main id="container--register">
+    <div class="container w-75">
+        <!-- title -->
+        <h4 class="text-center mb-4">Регистрация</h4>
+        <hr>
+        <!-- form -->
+        <div class="d-flex justify-content-center mb-5">
+            <form method="post" id="registrationForm" asp-controller="Account" asp-action="Register">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="lastName">Фамилия</label>
+                        <input id="lastName" type="text" name="lastName" required class="form-control"
+                               onblur="valid(document.getElementById('form'))" asp-for="SecondName">
+                        <span id="email_help" class="form-text text-muted"></span>
+                    </div>
 
-<div>
-    <form method="post" asp-controller="Account" asp-action="Register">
-        <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group col">
+                        <label for="firstName">Имя</label>
+                        <input id="firstName" type="text" name="firstName" required class="form-control"
+                               onblur="valid(document.getElementById('form'))" asp-for="FirstName">
+                        <span id="email_help" class="form-text text-muted"></span>
+                    </div>
+                </div>
 
-        <div>
-            <label asp-for="Name">Name</label>
-            <input type="text" asp-for="Name" />
-            <span asp-validation-for="Name"></span>
+                <div class="form-row">
+                    <div class="col-md-5 form-group">
+                        <label for="birthDate">Дата рождения</label>
+                        <input id="birthDate" type="date" name="birthDate" required class="form-control" placeholder="Введите имя" max="2010-12-12"
+                               onblur="valid(document.getElementById('form'))" asp-for="DateOfBirth">
+                        <span id="email_help" class="form-text text-muted"></span>
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="emailEnter">Email</label>
+                        <input id="emailEnter" type="email" name="email" required class="form-control" placeholder="example@gmail.com"
+                               onblur="valid(document.getElementById('form'))" asp-for="Email">
+                        <span id="email_help" class="form-text text-muted"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="passwordEnter">Пароль</label>
+                        <input required type="password" name="passwordEnter" id="passwordEnter" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="NewPassword">
+                        <span id="password_help" class="form-text text-muted"></span>
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="passwordConfirm">Подтвердите пароль</label>
+                        <input required type="password" name="passwordConfirm" id="passwordConfirm" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="ConfirmPassword">
+                        <span id="password_help" class="form-text text-muted"></span>
+                    </div>
+                </div>
+
+                <button id="registerButton" type="submit" class="btn btn-secondary btn">Регистрация</button>
+                <br>
+            </form>
         </div>
-
-        <div>
-            <label asp-for="Email">Email</label>
-            <input type="email" asp-for="Email" />
-            <span asp-validation-for="Email"></span>
-        </div>
-
-        <div>
-            <label asp-for="NewPassword">Password</label>
-            <input type="password" asp-for="NewPassword" />
-            <span asp-validation-for="NewPassword"></span>
-        </div>
-
-        <div>
-            <label asp-for="ConfirmPassword">Confirm Password</label>
-            <input type="password" asp-for="ConfirmPassword" />
-            <span asp-validation-for="ConfirmPassword"></span>
-        </div>
-
-        <div>
-            <input type="submit" value="Зарегистрироваться" />
-        </div>
-    </form>
-</div>
+    </div>
+</main>
+<hr />
