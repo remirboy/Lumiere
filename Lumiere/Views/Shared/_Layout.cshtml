@@ -7,9 +7,6 @@
 
     @await  Html.PartialAsync("StylesPartial")
 
-    <!-- swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <body class="bg-light">
     <div class="container w-75">
@@ -24,24 +21,9 @@
 
         @await Html.PartialAsync("FooterPartial")
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await  Html.PartialAsync("ScriptsPartial")
         @RenderSection("Scripts", required: false)
 
-        <!-- Initialize Swiper -->
-        <script>
-            var swiper = new Swiper('.swiper-container', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-        </script>
     </div>
 </body>
 </html>
