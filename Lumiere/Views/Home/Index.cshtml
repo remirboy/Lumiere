@@ -2,6 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div class="container w-75 d-flex flex-column align-items-center pl-5 pr-5 mb-5">
+    <h3 class="text-center mt-5 mb-5">Сегодня в кино</h3>
+    <div class="d-flex justify-content-around flex-wrap mb-3">
+        <!-- movie card -->
+        <div class="card mr-2 mb-3" style="width: 13rem;">
+            <a href="./movie.html">
+                <img src="./img/posters/img1.jpg" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body text-center">
+                <a href="./movie.html">
+                    <h6 class="card-title text-body">Лесси. Возвращение домой 6+</h6>
+                </a>
+                <span class="card-text">12:20</span>
+                <span class="card-text">14:50</span>
+                <span class="card-text">17:10</span>
+            </div>
+        </div>
+    </div>
+    
+    <button type="button" class="btn btn-warning">
+        <i class="icofont-film pr-2"></i>
+        Забронировать
+    </button>
+
 </div>
+<hr>
