@@ -10,7 +10,13 @@ namespace Lumiere.ViewModels
     {
         [Required(ErrorMessage = "Не указано имя")]
         [StringLength(50, ErrorMessage = "Длина имени должна быть меньше 50 символов")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Не указана фамлия")]
+        [StringLength(50, ErrorMessage = "Длина фамилии должна быть меньше 50 символов")]
+        public string SecondName { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Не указан Email")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]

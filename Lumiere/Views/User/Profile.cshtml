@@ -4,14 +4,45 @@
     ViewData["Title"] = "Profile";
 }
 
-<h1>Profile</h1>
+<main id="container--account">
+    <div class="container w-75">
+        <i class="icofont-home left-corner"></i>
+        <h4 class="text-center mb-4">Личный кабинет | @Model.FirstName @Model.SecondName</h4>
+        <hr>
+        <div class="row">
+            <div class="col col-lg-5">
+                <div class="text-center mb-4">
+                    <span class="h5">Личная информация</span>
+                    <a asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>
+                        <i class="icofont-pencil-alt-2 ml-3"></i>
+                    </a>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        @Model.SecondName
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        @Model.FirstName
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-envelope mr-2" aria-hidden="true"></i>
+                        @Model.Email
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+                        @Model.DateOfBirth.ToString("d")
+                    </li>
+                </ul>
+            </div>
 
-<div>
-    <h3>@Model.FirstName @Model.SecondName</h3>
+            <div class="scrollable col pl-4">
+                <div class="mb-4 text-center"><span class="h5">Забронированные фильмы</span></div>
 
-    <p>@Model.Email</p>
+                @await  Component.InvokeAsync("ReservedSeatsList", Model)
 
-    <p>@Model.DateOfBirth</p>
-
-    <a asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>Редактировать профиль</a>
-</div>
+            </div>
+        </div>
+    </div>
+</main>

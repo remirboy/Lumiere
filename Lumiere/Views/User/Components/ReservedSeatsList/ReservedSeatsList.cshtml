@@ -1,0 +1,28 @@
+﻿@using Lumiere.ViewModels
+@model List<ReservedFilmViewModel>
+
+@foreach (ReservedFilmViewModel reservedFilm in Model)
+{
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src=@reservedFilm.FilmPosterUrl class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title text-center">@reservedFilm.FilmName</h5>
+                    <div class="d-flex flex-column text-center justify-content-between">
+                        <span class="card-text text-dark mb-2">Длительность: @reservedFilm.FilmDuration</span>
+                        <p class="card-text h6">Дата сеанса: @reservedFilm.SeanceDate</p>
+                        <p class="card-text h6">Время сеанса: @reservedFilm.SeanceTime</p>
+                        <p class="card-text h6">Зал @reservedFilm.RoomNumber</p>
+                        @foreach (KeyValuePair<int, int> rowSeatNumber in reservedFilm.RowSeatNumbers)
+                        {
+                            <p class="card-text h6">Ряд @rowSeatNumber.Key Место @rowSeatNumber.Value</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -87,7 +87,9 @@ namespace Lumiere.Controllers
                 {
                     Email = model.Email,
                     UserName = model.Email,
-                    FirstName = model.Name
+                    FirstName = model.FirstName,
+                    SecondName = model.SecondName,
+                    DateOfBirth = model.DateOfBirth
                 };
 
                 var result = await _userRepository.CreateWithPasswordAsync(user, model.NewPassword);

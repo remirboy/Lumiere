@@ -1,40 +1,61 @@
 @inject Lumiere.Repositories.IUserRepository _userRepository
-                     
-<header class="d-flex justify-content-around align-items-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index"></a>
-        <img id="logo" src="~/img/logo.png" alt="Кинотеатр Люмьер логотип">
-    
-    <div class="d-flex flex-column align-items-center">
-        <form class="search">
-            <input type="search" name="search" placeholder="Поиск по фильмам">
-            <button class="search-button" aria-label="Найти на сайте"></button>
-        </form>
-        <ul class="list-inline m-0 pt-2">
-            <li class="list-inline-item pr-4"><a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Афиша</a></li>|
-            <li class="list-inline-item pl-4 pr-4"><a class="text-dark">Забронировать</a></li>|
-            <li class="list-inline-item pl-4"><a href="#footer" class="text-dark">Контакты</a></li>
-        </ul>
-    </div>
-    <div>
+
+    <header class="d-flex container-sm sticky-top justify-content-around align-items-center">
+        <img src="/img/logo.png" alt="Кинотеатр Люмьер логотип" id="logo">
+
+        <div class="d-flex flex-column align-items-center">
+            <form class="search">
+                <input type="search" name="search" placeholder="Поиск по фильмам">
+                <button class="search-button" aria-label="Найти на сайте"></button>
+            </form>
+
+            <ul class="list-inline m-0 pt-2">
+                <li class="list-inline-item pr-4">
+                    <a class="text-dark" asp-controller="Home" asp-action="Index">Афиша</a>
+                </li>|
+                <li class="list-inline-item pl-4 pr-4">
+                    <a href=# class="text-dark">Забронировать</a>
+                </li>|
+                <li class="list-inline-item pl-4">
+                    <a href="#footer" class="text-dark">Контакты</a>
+                </li>
+            </ul>
+        </div>
+
         @if (User.Identity.IsAuthenticated)
         {
             <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
-               Мой профиль
+                Мой профиль
             </a>
-      
+
             <form method="post" asp-controller="Account" asp-action="Logout">
                 <i class="icofont-login pr-2"></i>
                 <button class="text-dark" type="submit">Выйти</button>
             </form>
-
         }
         else
         {
-            <i class="icofont-login pr-2"></i>
-            <a class="text-dark" asp-controller="Account" asp-action="Login">Войти</a>
+            <button id="auth--button" class="text-dark">
+                    <i class="icofont-login pr-2"></i>
+                    Войти
+            </button>
             <br>
-            <a class="text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+            <a class="text-dark" asp-controller="Account" asp-action="Register">
+                Регистрация
+            </a>
         }
-    </div>
-</header>
+    </header>
 
+<!-- auth modal -->
+<div class="modal" id="authModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @await  Html.PartialAsync("../Account/Login.cshtml", new Lumiere.ViewModels.LoginViewModel())
+            </div>
+        </div>
+    </div>
+</div>
