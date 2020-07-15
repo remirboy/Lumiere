@@ -79,11 +79,11 @@ namespace Lumiere.Controllers
 
             for (int i = 0; i < reservedSeats.SeatNumbers.Length; i++)
             {
-                double rowNumber = reservedSeats.SeatNumbers[i] / seatsCountInRow;
+                double rowNumber = (reservedSeats.SeatNumbers[i] + 1) / seatsCountInRow;
                 ReservedSeat reservedSeat = new ReservedSeat
                 {
                     RowNumber = Convert.ToInt32(Math.Ceiling(rowNumber)),
-                    SeatsNumber = reservedSeats.SeatNumbers[i],
+                    SeatsNumber = reservedSeats.SeatNumbers[i] + 1,
                     UserId = userId,
                     SeanceId = seanceId
                 };
