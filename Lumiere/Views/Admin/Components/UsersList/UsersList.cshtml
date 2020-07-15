@@ -10,8 +10,7 @@
             <th scope="col">Фамилия</th>
             <th scope="col">Имя</th>
             <th scope="col">Админ</th>
-            <th scope="col">Ссылка</th>
-            <th scope="col">Удалить</th>
+            <th scope="col">Профиль</th>
         </tr>
     </thead>
     <tbody>
@@ -21,14 +20,12 @@
                 <td scope="row">@user.Email</td>
                 <td>@user.SecondName</td>
                 <td>@user.FirstName</td>
-                <td>@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
-                <td>
-                    <a class="text-info" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id>Редактировать</a>
-                </td>
-                <td>
+                <td class="text-center">@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
+                <td class="text-center">
+                    <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id><i class="icofont-user"></i></a>
                     <form method="post" asp-controller="User" asp-action="Delete">
                         <input type="hidden" asp-for=@user.Id/>
-                        <button type="submit"><i class="icofont-ui-delete ml-2"></i></button>
+                        <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
                     </form>
                 </td>
             </tr>

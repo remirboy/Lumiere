@@ -8,7 +8,7 @@
         <div class="row no-gutters">
             <div class="col-md-4">
                 <a asp-controller="Film" asp-action="Index" asp-route-id=@film.Id>
-                    <img src=@film.Posters.First().Url class="card-img" style="max-height: 250px;" alt="...">
+                    <img src=@film.Posters.First().Url class="card-img" style="max-height: 250px;" alt="Постер фильма">
                 </a>
             </div>
             <div class="col-md-8">
@@ -21,23 +21,27 @@
                             <input type="hidden" asp-for=@film.Id name="id" />
                             <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
                         </form>
+                        <form>
+                            <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
+                        </form>
                     </div>
 
-                    <div class="d-flex flex-column text-center justify-content-between mr-5">
-                        <span class="text-dark mb-3">драма, приключение, семейный</span>
+                    <div class="d-flex flex-column text-center justify-content-between mr-5 pl-3 pr-3">
+                        <span class="text-dark mb-2">драма, приключение, семейный</span>
                         <small class="card-text text-dark">Длительность: @film.Duration</small>
-                        <small class="card-text">
+                        <small class="card-text">Формат: 2D</small>
+                        <small class="card-text pr-2 pl-2">
                             Время сеансов сегодня:
+                            <br />
                             @foreach (FilmSeance seance in film.Seances)
                             {
                                 if (seance.Date == DateTime.Today)
                                 {
-                                    <small class="card-text">@seance.Time.ToString("t")</small>
+                                    <span class="card-text">@seance.Time.ToString("t")</span>
                                 }
                             }
                         </small>
-                        <small class="card-text">Формат: 2D</small>
-                        <small class="card-text">@film.Description</small>
+                        <small class="card-text mt-1">@film.Description</small>
                     </div>
                 </div>
             </div>
