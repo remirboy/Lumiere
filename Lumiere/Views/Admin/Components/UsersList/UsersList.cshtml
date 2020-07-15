@@ -21,10 +21,10 @@
                 <td>@user.SecondName</td>
                 <td>@user.FirstName</td>
                 <td class="text-center">@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
-                <td class="text-center">
+                <td class="d-flex justify-content-center align-items-center border-0">
                     <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id><i class="icofont-user"></i></a>
                     <form method="post" asp-controller="User" asp-action="Delete" asp-route-id=@user.Id>
-                        <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
+                        <button type="submit"><i class="icofont-ui-delete"></i></button>
                     </form>
                 </td>
             </tr>
