@@ -102,7 +102,7 @@ namespace Lumiere.Controllers
 
             await _userRepository.DeleteAsync(user);
 
-            return View("Profile", id);
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

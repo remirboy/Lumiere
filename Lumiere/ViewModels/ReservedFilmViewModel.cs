@@ -5,6 +5,7 @@ namespace Lumiere.ViewModels
 {
     public class ReservedFilmViewModel
     {
+        public Guid FilmId { get; set; }
         public Guid SeanceId { get; set; }
         public string FilmName { get; set; }
         public string FilmPosterUrl { get; set; }

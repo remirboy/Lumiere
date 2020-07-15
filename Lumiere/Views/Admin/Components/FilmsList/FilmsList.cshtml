@@ -1,57 +1,46 @@
 ﻿@model List<Lumiere.Models.Film>
 
-@{
-    ViewData["Title"] = "FilmsList";
-}
+<div class="mb-4 text-center"><span class="h5">Список фильмов</span></div>
 
-<h3>FilmsList</h3>
+@foreach(Film film in Model) 
+{
+    <div class="card mb-3" style="max-height: 255px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <a asp-controller="Film" asp-action="Index" asp-route-id=@film.Id>
+                    <img src=@film.Posters.First().Url class="card-img" style="max-height: 250px;" alt="...">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body pl-0">
+                    <div class="d-flex text-center mb-1">
+                        <span class="h6 card-title text-center flex-grow-1">@film.Name @film.AgeLimit+</span>
 
-<div class="m-1" style="border: 2px solid black">
-    <div>
-        <a asp-controller="Film" asp-action="Create">Добавить новый фильм</a>
-    </div>
+                        <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id><i class="icofont-pencil-alt-2 ml-3"></i></a>
+                        <form method="post" asp-controller="Film" asp-action="Delete">
+                            <input type="hidden" asp-for=@film.Id name="id" />
+                            <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
+                        </form>
+                    </div>
 
-    @foreach(Film film in Model)
-    {
-        <div class="m-1" style="border: 1px dashed black">
-            <h4>@film.Name</h4>
-            <p>@film.Description</p>
-            <p>@film.AgeLimit</p>
-            <p>@film.ReleaseDate</p>
-            <p>@film.Duration</p>
-
-            <h4>Posters</h4>
-            @foreach(FilmPoster poster in film.Posters)
-            {
-                <img src=@poster.Url  width="100" height="100"/>
-            }
-
-            <h4>Trailer</h4>
-            <p>@film.Trailer.Url</p>
-
-            <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id>Редактировать</a>
-            <form method="post" asp-controller="Film" asp-action="Delete">
-                <input type="hidden" asp-for=@film.Id name="id" />
-                <input type="submit" value="Удалить" />
-            </form>
-
-            <h4>Seances</h4>
-            @foreach (FilmSeance seance in film.Seances)
-            {
-                <div>
-                    <span>@seance.Date</span>
-                    <span>@seance.Time</span>
-                    <span>@seance.Price</span>
-                    <form method="post" asp-controller="Seance" asp-action="Delete">
-                        <input type="hidden" asp-for=@seance.Id name="id" />
-                        <input type="submit" value="Удалить" />
-                    </form>
+                    <div class="d-flex flex-column text-center justify-content-between mr-5">
+                        <span class="text-dark mb-3">драма, приключение, семейный</span>
+                        <small class="card-text text-dark">Длительность: @film.Duration</small>
+                        <small class="card-text">
+                            Время сеансов сегодня:
+                            @foreach (FilmSeance seance in film.Seances)
+                            {
+                                if (seance.Date == DateTime.Today)
+                                {
+                                    <small class="card-text">@seance.Time.ToString("t")</small>
+                                }
+                            }
+                        </small>
+                        <small class="card-text">Формат: 2D</small>
+                        <small class="card-text">@film.Description</small>
+                    </div>
                 </div>
-            }
-
-            <div>
-                @await Html.PartialAsync("CreateSeance", new Lumiere.ViewModels.CreateSeanceViewModel() { FilmId = film.Id })
             </div>
         </div>
-    }
-</div>
+    </div>
+}

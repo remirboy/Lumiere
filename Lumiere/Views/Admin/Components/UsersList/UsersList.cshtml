@@ -1,33 +1,37 @@
 ﻿@model List<Lumiere.Models.User>
 @inject Lumiere.Repositories.IUserRepository _userRepository
 
-@{
-    ViewData["Title"] = "UsersList";
-}
+<div class="mb-3 text-center"><span class="h5">Список пользователей</span></div>
 
-<h3>UsersList</h3>
-
-<div class="m-1" style="border: 2px solid black">
-    <table>
-        <tr class="border p-1">
-            <th class="p-1">Имя</th>
-            <th class="p-1">Фамилия</th>
-            <th class="p-1">Email</th>
-            <th class="p-1">Админ</th>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">e-mail</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Админ</th>
+            <th scope="col">Ссылка</th>
+            <th scope="col">Удалить</th>
         </tr>
+    </thead>
+    <tbody>
         @foreach (User user in Model)
         {
-            <tr class="border p-1">
-                <th class="p-1">@user.FirstName</th>
-                <th class="p-1">@user.SecondName</th>
-                <th class="p-1">@user.Email</th>
-                <th class="p-1">
-                    @(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")
-                </th>
-                <th class="p-1">
-                    <a asp-controller="User" asp-action="Edit" asp-route-id=@user.Id >Редактировать</a>
-                </th>
-            </tr>    
+            <tr>
+                <td scope="row">@user.Email</td>
+                <td>@user.SecondName</td>
+                <td>@user.FirstName</td>
+                <td>@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
+                <td>
+                    <a class="text-info" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id>Редактировать</a>
+                </td>
+                <td>
+                    <form method="post" asp-controller="User" asp-action="Delete">
+                        <input type="hidden" asp-for=@user.Id/>
+                        <button type="submit"><i class="icofont-ui-delete ml-2"></i></button>
+                    </form>
+                </td>
+            </tr>
         }
-    </table>
-</div>
+    </tbody>
+</table>

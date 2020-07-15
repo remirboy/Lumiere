@@ -2,10 +2,34 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <main id="container--account">
+        <div class="container w-75 mt-4">
+            <div class="d-flex align-items-center mb-4">
+                <i class="icofont-home ml-4"></i>
+                <h4 class="flex-grow-1 text-center">Панель администратора</h4>
+            </div>
+            <hr>
 
-<div>
-    @await  Component.InvokeAsync("UsersList")
+            <!-- tab nav -->
+            <div class="row">
+                <div class="col col-3">
+                    <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active text-dark" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Пользователи</a>
+                        <a class="nav-link text-dark" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Фильмы</a>
+                    </div>
+                </div>
 
-    @await  Component.InvokeAsync("FilmsList")
-</div>
+                <div class="tab-content scrollable col pl-4" id="v-pills-tabContent">
+                    <!-- users tab -->
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        @await  Component.InvokeAsync("UsersList")
+                    </div>
+                    
+                    <!-- movies tab -->
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        @await  Component.InvokeAsync("FilmsList")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
