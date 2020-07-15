@@ -23,61 +23,11 @@
                     <!-- users tab -->
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         @await  Component.InvokeAsync("UsersList")
-
                     </div>
                     
                     <!-- movies tab -->
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                        <div class="mb-4 text-center"><span class="h5">Список фильмов</span></div>
-                        <!-- film card -->
-                        <div class="card mb-3" style="max-height: 255px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="./img/posters/img1.jpg" class="card-img" style="max-height: 250px;" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body pl-0">
-                                        <div class="d-flex text-center mb-1">
-                                            <span class="h6 card-title text-center flex-grow-1">Лесси. Возвращение домой 2D</span>
-                                            <i class="icofont-pencil-alt-2 ml-3"></i>
-                                            <i class="icofont-ui-delete ml-1"></i>
-                                        </div>
-                                        <div class="d-flex flex-column text-center justify-content-between mr-5">
-                                            <span class="text-dark mb-3">драма, приключение, семейный</span>
-                                            <small class="card-text text-dark">Длительность: 1 час 40 минут</small>
-                                            <small class="card-text">Время сеансов сегодня: 12:20 14:40 16:10</small>
-                                            <small class="card-text">Формат: 2D</small>
-                                            <small class="card-text"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3" style="max-height: 255px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="./img/posters/img1.jpg" class="card-img" style="max-height: 250px;" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body pl-0">
-                                        <div class="d-flex text-center mb-1">
-                                            <span class="h6 card-title text-center flex-grow-1">Лесси. Возвращение домой 2D</span>
-                                            <i class="icofont-pencil-alt-2 ml-3"></i>
-                                            <i class="icofont-ui-delete ml-1"></i>
-                                        </div>
-                                        <div class="d-flex flex-column text-center justify-content-between mr-5">
-                                            <span class="text-dark mb-3">драма, приключение, семейный</span>
-                                            <small class="card-text text-dark">Длительность: 1 час 40 минут</small>
-                                            <small class="card-text">Время сеансов сегодня: 12:20 14:40 16:10</small>
-                                            <small class="card-text">Формат: 2D</small>
-                                            <small class="card-text"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        @await  Component.InvokeAsync("FilmsList")
                     </div>
                 </div>
             </div>
