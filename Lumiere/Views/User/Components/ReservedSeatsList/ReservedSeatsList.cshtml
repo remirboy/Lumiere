@@ -6,11 +6,14 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src=@reservedFilm.FilmPosterUrl class="card-img" alt="...">
+                <a asp-controller="Film" asp-action="Index" asp-route-id=@reservedFilm.FilmId>
+                    <img src=@reservedFilm.FilmPosterUrl class="card-img" alt="...">
+                </a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title text-center">@reservedFilm.FilmName</h5>
+
                     <div class="d-flex flex-column text-center justify-content-between">
                         <span class="card-text text-dark mb-2">Длительность: @reservedFilm.FilmDuration</span>
                         <p class="card-text h6">Дата сеанса: @reservedFilm.SeanceDate</p>

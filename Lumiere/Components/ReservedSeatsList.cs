@@ -38,6 +38,7 @@ namespace Lumiere.Components
                 {
                     reservedFilm = new ReservedFilmViewModel
                     {
+                        FilmId = film.Id,
                         SeanceId = seance.Id,
                         FilmName = film.Name,
                         FilmPosterUrl = film.Posters.First().Url,
