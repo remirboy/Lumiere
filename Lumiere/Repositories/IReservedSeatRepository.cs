@@ -2,7 +2,7 @@
 
 namespace Lumiere.Repositories
 {
-    interface IReservedSeatRepository : ICrud<ReservedSeat>
+    public interface IReservedSeatRepository : ICrud<ReservedSeat>
     {
     }
 }

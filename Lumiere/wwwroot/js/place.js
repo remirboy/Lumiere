@@ -72,6 +72,7 @@ function setMessage(){
 function setPrice(){
 	document.getElementById('price').innerHTML = price;
 }
+
 function block(){
 	for (var i = 0; i < blocked.length; i++) {
 		list[blocked[i]].style="background-color : #818292";
@@ -99,7 +100,7 @@ function block(){
 
 function f(list) {
 	$.ajax({
-		url: "/getSold",
+		url: "/Booking/GetReservedSeats",
   		dataType: "json",
 		success: function (msg) {
 			if (msg.objects.length > 0) {
@@ -114,4 +115,5 @@ function f(list) {
 		}
 	});
 }
+
 setInterval( f, 1000, list);

@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<i class="fa fa-home" id="home" aria-hidden="true"></i>
+<h3 class="text-center h3 mb-4">Бронирование билетов</h3>
+<hr>
+
+<div class="information container w-75" id="information">
+    <div id="options" class="d-flex justify-content-around">
+        <select id='film' class="select">
+            <option>Лесси</option>
+            <option>Один дома</option>
+            <option>Бумер</option>
+        </select>
+        <select id='time' class="select">
+            <option>14:30</option>
+            <option>15:55</option>
+            <option>12:45</option>
+        </select>
+        <select id='date' class="select">
+            <option>24.05</option>
+            <option>22.05</option>
+            <option>22.05</option>
+        </select>
+    </div>
+    <table id="places">
+        <tr>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+        </tr>
+        <tr>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+        </tr>
+
+        <tr>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+        </tr>
+
+        <tr>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+        </tr>
+
+        <tr>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+        </tr>
+    </table>
+
+    <div class="d-flex justify-content-around align-items-center mt-3">
+        <table id="table">
+            <tbody>
+                <tr>
+                    <th class="field">Выбрано мест:</th>
+                    <td id="number" class="value">
+                        <script>
+                            document.getElementById('number').innerHTML = count;
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="field">Стоимость(руб):</th>
+                    <td class="value">
+                        500
+                    </td>
+                </tr>
+                <tr>
+                    <th class="field">Общая стоимость(руб):</th>
+                    <td id="price" class="value">
+                        <script>
+                            document.getElementById('price').innerHTML = price;
+                        </script>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="buy" onclick="book()">Бронировать</button>
+        <table id="room">
+            <tbody>
+                <tr>
+                    <th class="field">Зал:</th>
+                    <td class="value">
+                        2
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <span id="place_help" class="help"></span>
+</div>
