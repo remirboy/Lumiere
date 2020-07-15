@@ -56,6 +56,7 @@ function sendJSON() {
 		SeatNumbers: booked,
 		RoomNumber: $('#room_number').text(),
 		Date: $('#date').val(),
+		Price: $('#price').text(),
 		Time: $('#time').val(),
 		FilmId: $('#film').val()
 	};

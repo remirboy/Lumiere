@@ -1,4 +1,6 @@
-﻿
+﻿@using  Lumiere.ViewModels
+@model List<BookingFilmViewModel>
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,9 +12,10 @@
 <div class="information container w-75" id="information">
     <div id="options" class="d-flex justify-content-around">
         <select id='film' class="select">
-            <option>Лесси</option>
-            <option>Один дома</option>
-            <option>Бумер</option>
+            @foreach (BookingFilmViewModel bookingFilm in Model)
+            {
+                <option value=@bookingFilm.FilmId>@bookingFilm.FilmName</option>
+            }
         </select>
         <select id='time' class="select">
             <option>14:30</option>
@@ -27,34 +30,34 @@
     </div>
     <table id="places">
         <tr>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
         </tr>
         <tr>
-            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-        </tr>
-
-        <tr>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" oninput="f()" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
         </tr>
 
         <tr>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
-            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1" ></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+        </tr>
+
+        <tr>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
+            <td id="checkbox"><input class="check" onclick="takePlace(this)" type="checkbox" placeholder="1:1"></td>
         </tr>
 
         <tr>
@@ -79,7 +82,7 @@
                 </tr>
                 <tr>
                     <th class="field">Стоимость(руб):</th>
-                    <td class="value">
+                    <td class="value" id="price">
                         500
                     </td>
                 </tr>
