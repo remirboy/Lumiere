@@ -22,41 +22,7 @@
                 <div class="tab-content scrollable col pl-4" id="v-pills-tabContent">
                     <!-- users tab -->
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div class="mb-3 text-center"><span class="h5">Список пользователей</span></div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">e-mail</th>
-                                    <th scope="col">Фамилия</th>
-                                    <th scope="col">Имя</th>
-                                    <th scope="col">Ссылка</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td scope="row">example@gmail.com</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>
-                                        <a href="#" class="text-info">профиль</a>
-                                        <i class="icofont-ui-delete ml-2"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">example@gmail.com</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td><a href="#" class="text-info">профиль</a></td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">example@gmail.com</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td><a href="#" class="text-info">профиль</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        @await  Component.InvokeAsync("UsersList")
 
                     </div>
                     
