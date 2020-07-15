@@ -56,4 +56,6 @@
             <input type="submit" value="Редактировать" />
         </div>
     </form>
+
+    @await  Html.PartialAsync("CreateSeance", new Lumiere.ViewModels.CreateSeanceViewModel { FilmId = Model.Id })
 </div>

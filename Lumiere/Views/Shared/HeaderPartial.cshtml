@@ -26,25 +26,37 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-            <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
-                Мой профиль
-            </a>
+            <div>
+                <div>
+                    <a class="text-dark" asp-controller="User" asp-action="Profile" asp-route-id=@await _userRepository.GetCurrentUserId(User)>
+                        Мой профиль
+                    </a>
+                </div>
 
-            <form method="post" asp-controller="Account" asp-action="Logout">
-                <i class="icofont-login pr-2"></i>
-                <button class="text-dark" type="submit">Выйти</button>
-            </form>
+                <div>
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <i class="icofont-login pr-2"></i>
+                        <button class="text-dark" type="submit">Выйти</button>
+                    </form>
+                </div>
+            </div>
         }
         else
         {
-            <button id="auth--button" class="text-dark">
-                    <i class="icofont-login pr-2"></i>
-                    Войти
-            </button>
-            <br>
-            <a class="text-dark" asp-controller="Account" asp-action="Register">
-                Регистрация
-            </a>
+            <div>
+                <div>
+                    <button id="auth--button" class="text-dark">
+                        <i class="icofont-login pr-2"></i>
+                        Войти
+                    </button>
+                </div>
+
+                <div>
+                    <a class="text-dark" asp-controller="Account" asp-action="Register">
+                        Регистрация
+                    </a>
+                </div>
+            </div>
         }
     </header>
 

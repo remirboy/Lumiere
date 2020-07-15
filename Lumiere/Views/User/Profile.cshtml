@@ -14,7 +14,7 @@
             <div class="col col-lg-5">
                 <div class="text-center mb-4">
                     <span class="h5">Личная информация</span>
-                    <a asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>
+                    <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>
                         <i class="icofont-pencil-alt-2 ml-3"></i>
                     </a>
                 </div>
@@ -41,9 +41,12 @@
             <div class="scrollable col pl-4">
                 <div class="mb-4 text-center"><span class="h5">Забронированные фильмы</span></div>
 
-                @await  Component.InvokeAsync("ReservedSeatsList", Model)
+                @await Component.InvokeAsync("ReservedSeatsList", Model)
 
             </div>
         </div>
     </div>
+    <hr />
 </main>
+
+@await Html.PartialAsync("Posters")

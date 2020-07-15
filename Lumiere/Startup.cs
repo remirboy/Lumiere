@@ -27,7 +27,14 @@ namespace Lumiere
 
             services.AddDbContext<LumiereContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;   // минимальная длина
+                options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+                options.Password.RequireLowercase = true; // требуются ли символы в нижнем регистре
+                options.Password.RequireUppercase = true; // требуются ли символы в верхнем регистре
+                options.Password.RequireDigit = true; // требуются ли цифры
+            })
                 .AddEntityFrameworkStores<LumiereContext>()
                 .AddDefaultTokenProviders();
 

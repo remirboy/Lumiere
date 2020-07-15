@@ -16,12 +16,9 @@
                     <div class="d-flex text-center mb-1">
                         <span class="h6 card-title text-center flex-grow-1">@film.Name @film.AgeLimit+</span>
 
-                        <a asp-controller="Film" asp-action="Update" asp-route-id=@film.Id><i class="icofont-pencil-alt-2 ml-3"></i></a>
+                        <a class="text-info text-dark" asp-controller="Film" asp-action="Update" asp-route-id=@film.Id><i class="icofont-pencil-alt-2 ml-3"></i></a>
                         <form method="post" asp-controller="Film" asp-action="Delete">
                             <input type="hidden" asp-for=@film.Id name="id" />
-                            <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
-                        </form>
-                        <form>
                             <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
                         </form>
                     </div>
@@ -41,7 +38,7 @@
                                 }
                             }
                         </small>
-                        <small class="card-text mt-1">@film.Description</small>
+                        <small class="card-text mt-1 text-truncate">@film.Description</small>
                     </div>
                 </div>
             </div>

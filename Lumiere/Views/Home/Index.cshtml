@@ -4,14 +4,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+@await Html.PartialAsync("Posters")
+
 <div class="container w-75 d-flex flex-column align-items-center pl-5 pr-5 mb-5">
     <h3 class="text-center mt-5 mb-5">Сегодня в кино</h3>
     <div class="d-flex justify-content-around flex-wrap mb-3">
-        @foreach (Film film in Model) {
+        @foreach (Film film in Model)
+        {
             @await Html.PartialAsync("../Film/FilmCard.cshtml", film)
         }
     </div>
-    
+
     <button type="button" class="btn btn-warning">
         <i class="icofont-film pr-2"></i>
         Забронировать

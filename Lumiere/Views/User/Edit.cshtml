@@ -33,7 +33,7 @@
         {
             <div>
                 <label asp-for="IsAdmin">Admin</label>
-                <input type="checkbox" asp-for="IsAdmin"/>
+                <input type="checkbox" asp-for="IsAdmin" />
                 <span asp-validation-for="IsAdmin"></span>
             </div>
         }
@@ -43,3 +43,6 @@
         </div>
     </form>
 </div>
+<hr />
+
+@await Html.PartialAsync("Posters")

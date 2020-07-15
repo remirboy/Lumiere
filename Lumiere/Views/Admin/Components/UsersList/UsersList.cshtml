@@ -23,8 +23,7 @@
                 <td class="text-center">@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
                 <td class="text-center">
                     <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id><i class="icofont-user"></i></a>
-                    <form method="post" asp-controller="User" asp-action="Delete">
-                        <input type="hidden" asp-for=@user.Id/>
+                    <form method="post" asp-controller="User" asp-action="Delete" asp-route-id=@user.Id>
                         <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
                     </form>
                 </td>

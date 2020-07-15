@@ -15,14 +15,14 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="lastName">Фамилия</label>
-                        <input id="lastName" type="text" name="lastName" required class="form-control"
+                        <input id="lastName" type="text" required class="form-control"
                                onblur="valid(document.getElementById('form'))" asp-for="SecondName">
                         <span id="email_help" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group col">
                         <label for="firstName">Имя</label>
-                        <input id="firstName" type="text" name="firstName" required class="form-control"
+                        <input id="firstName" type="text" required class="form-control"
                                onblur="valid(document.getElementById('form'))" asp-for="FirstName">
                         <span id="email_help" class="form-text text-muted"></span>
                     </div>
@@ -31,14 +31,14 @@
                 <div class="form-row">
                     <div class="col-md-5 form-group">
                         <label for="birthDate">Дата рождения</label>
-                        <input id="birthDate" type="date" name="birthDate" required class="form-control"
+                        <input id="birthDate" type="date" required class="form-control"
                                onblur="valid(document.getElementById('form'))" asp-for="DateOfBirth">
                         <span id="email_help" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group col">
                         <label for="emailEnter">Email</label>
-                        <input id="emailEnter" type="email" name="email" required class="form-control" placeholder="example@gmail.com"
+                        <input id="emailEnter" type="email" required class="form-control" placeholder="example@gmail.com"
                                onblur="valid(document.getElementById('form'))" asp-for="Email">
                         <span id="email_help" class="form-text text-muted"></span>
                     </div>
@@ -47,13 +47,13 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="passwordEnter">Пароль</label>
-                        <input required type="password" name="passwordEnter" id="passwordEnter" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="NewPassword">
+                        <input required type="password" id="passwordEnter" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="NewPassword">
                         <span id="password_help" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group col">
                         <label for="passwordConfirm">Подтвердите пароль</label>
-                        <input required type="password" name="passwordConfirm" id="passwordConfirm" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="ConfirmPassword">
+                        <input required type="password" id="passwordConfirm" placeholder="******" class="form-control" onblur="valid(document.getElementById('form'))" asp-for="ConfirmPassword">
                         <span id="password_help" class="form-text text-muted"></span>
                     </div>
                 </div>
@@ -63,5 +63,7 @@
             </form>
         </div>
     </div>
+    <hr />
 </main>
-<hr />
+
+@await Html.PartialAsync("Posters")
