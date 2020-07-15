@@ -21,6 +21,14 @@ header {
     padding-top: 40px;
 }
 
+.icofont-home {
+    font-size: 18px;
+}
+
+.icofont-pencil-alt-2 {
+    font-size: 16px
+}
+
 .scrollable {
     height: 60vh;
     overflow-y: scroll;
@@ -117,7 +125,6 @@ footer img {
 }
 
 .left-corner {
-    font-size: 18px;
     position: relative;
     top: 0.5rem;
     left: 30px

@@ -1,7 +1,9 @@
 @inject Lumiere.Repositories.IUserRepository _userRepository
 
     <header class="d-flex container-sm sticky-top justify-content-around align-items-center">
-        <img src="/img/logo.png" alt="Кинотеатр Люмьер логотип" id="logo">
+        <a asp-controller="Home" asp-action="Index">
+            <img src="/img/logo.png" alt="Кинотеатр Люмьер логотип" id="logo">
+        </a>
 
         <div class="d-flex flex-column align-items-center">
             <form class="search">

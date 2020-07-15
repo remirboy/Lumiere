@@ -63,6 +63,21 @@ url("./fonts/icofont.woff") format("woff");
   content: "\ebf6";
 }
 
+.icofont-film:before
+{
+  content: "\ef28";
+}
+
+.icofont-ui-delete:before
+{
+  content: "\ec53";
+}
+
+.icofont-user:before
+{
+  content: "\ed05";
+}
+
 .icofont-xs
 {
   font-size: .5em;
