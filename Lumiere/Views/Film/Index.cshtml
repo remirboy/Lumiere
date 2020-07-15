@@ -10,7 +10,13 @@
         <div class="d-flex justify-content-between">
             <i class="icofont-home left-corner mr-5"></i>
             <h4 class="text-center mb-4">@Model.Name @Model.AgeLimit+</h4>
-            <i class="icofont-pencil-alt-2 right-corner ml-5"></i>
+
+            @if (User.IsInRole("admin"))
+            {
+                <a asp-controller="Film" asp-action="Update" asp-route-id=@Model.Id>
+                    <i class="icofont-pencil-alt-2 right-corner ml-5"></i>
+                </a>
+            }
         </div>
         <hr class="mb-0">
 
