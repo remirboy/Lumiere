@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lumiere.Models;
 using Lumiere.Repositories;
+using Lumiere.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumiere.Controllers
@@ -25,6 +26,15 @@ namespace Lumiere.Controllers
         public List<ReservedSeat> GetReservedSeats()
         {
             return _reservedSeatRepository.GetAll().ToList();
+        }
+
+        [HttpPost]
+        public IActionResult ReservedSeats(ReservedSeatViewModel reservedSeats)
+        {
+
+
+
+            return RedirectToAction("Index");
         }
     }
 }

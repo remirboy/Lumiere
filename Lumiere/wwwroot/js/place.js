@@ -51,13 +51,35 @@ function book(){
 	booked = [];
 }
 
-function sendJSON(){
+function sendJSON() {
+	var reservedSeats = {
+		SeatNumbers: booked,
+		RoomNumber: $('#room_number').text(),
+		Date: $('#date').val(),
+		Time: $('#time').val(),
+		FilmId: $('#film').val()
+	};
+
+	/*
 	var xhr = new XMLHttpRequest();
-	var url = "/getSold";
+	var url = "/Booking/ReservedSeats";
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var data = JSON.stringify({ "places": booked});
+
+	var data = JSON.stringify(reservedSeat);
+	console.log(data);
 	xhr.send(data);
+	*/
+
+	$.ajax({
+		url: "/Booking/ReservedSeats/",
+		type: "POST",
+		data: reservedSeats,
+		dataType: "json", 
+		success: function (result) {
+
+		}
+	});
 }
 
 
@@ -116,4 +138,4 @@ function f(list) {
 	});
 }
 
-setInterval( f, 1000, list);
+//setInterval( f, 1000, list);
