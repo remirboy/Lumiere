@@ -148,9 +148,35 @@ namespace Lumiere.Controllers
         }
 
         [HttpPost]
-        public int LoadPrice(FilmSeance seance)
+        public int LoadPrice(FilmSeance filmSeance)
         {
+            if (filmSeance.FilmId == default)
+                return 0;
 
+            if (filmSeance.Date == default)
+                return 0;
+
+            if (filmSeance.Time == default)
+                return 0;
+
+            if (filmSeance.RoomNumber < 1 || filmSeance.RoomNumber > 2)
+                return 0;
+
+            List<FilmSeance> seances = _seanceRepository.GetByFilmId(filmSeance.FilmId).ToList();
+            if (filmSeance == null)
+                return 0;
+
+            foreach(FilmSeance seance in seances)
+            {
+                if(seance.Date == filmSeance.Date &&
+                    seance.Time == filmSeance.Time &&
+                    seance.RoomNumber == filmSeance.RoomNumber &&
+                    seance.FilmId == filmSeance.FilmId)
+                {
+                    return seance.Price;
+                }
+
+            }
 
             return 0;
         }
