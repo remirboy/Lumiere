@@ -11,34 +11,30 @@
         <hr>
         <!-- form -->
         <div class="d-flex justify-content-center">
-            <form class="w-50 mb-4" name="registration" method="post" id="registrationForm" asp-controller="Account" asp-action="Register">
+            <form class="mb-4" style="min-width: 40vw;" name="registration" method="post" id="registrationForm" asp-controller="Account" asp-action="Register">
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="lastName">Фамилия</label>
-                        <input id="lastName" type="text" required class="form-control"
-                               onblur="validRegistration()" asp-for="SecondName">
+                        <input id="lastName" type="text" required class="form-control" asp-for="SecondName">
                     </div>
 
                     <div class="form-group col">
                         <label for="firstName">Имя</label>
-                        <input id="firstName" type="text" required class="form-control"
-                               onblur="validRegistration()" asp-for="FirstName">
+                        <input id="firstName" type="text" required class="form-control" asp-for="FirstName">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-md-5 form-group">
                         <label for="birthDate">Дата рождения</label>
-                        <input id="birthDate" type="date" required class="form-control"
-                               onblur="validRegistration()" asp-for="DateOfBirth">
-                        <span id="email_help" class="form-text text-muted"></span>
+                        <input id="birthDate" type="date" required class="form-control" asp-for="DateOfBirth">
                     </div>
 
                     <div class="form-group col">
                         <label for="emailEnter">Email</label>
                         <input id="emailEnter" type="email" required class="form-control" placeholder="example@gmail.com"
                                onblur="validRegistration()" asp-for="Email">
-                        <span id="email_help" class="form-text text-muted"></span>
+                        <small id="email_helper" class="form-text text-muted"></small>
                     </div>
                 </div>
 

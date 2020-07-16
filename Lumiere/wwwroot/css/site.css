@@ -29,6 +29,10 @@ header {
     font-size: 16px
 }
 
+.icofont-vk {
+    font-size: 28px;
+}
+
 .scrollable {
     height: 60vh;
     overflow-y: scroll;

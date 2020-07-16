@@ -3,7 +3,6 @@ $(function(){
   authButton.onclick = function(){
     $('#authModal').modal('show')
   }
-
 });
 
 function valid(form){
@@ -30,59 +29,33 @@ function validRegistration(){
   var email = document.getElementById('emailEnter').value;
   var pass = document.getElementById('passwordEnter').value;
   var repass = document.getElementById('passwordConfirm').value;
-  var name = document.getElementById('firstName').value;
-  var surname = document.getElementById('lastName').value;
-  var birth = document.getElementById('birthDate').value;
   var exception;
+
   if (!validateEmail(email)) {
-    exception="Формат email: example@gmail.com";
-    document.getElementById('email_helper').innerHTML = exception;
+      exception="Формат email: example@gmail.com";
+      $('#email_helper').text(exception);
   }
   else{
-    document.getElementById('email_helper').innerHTML = '';
+      $('#email_helper').text('')
   }
-  if (!validateName(name)) {
-    exception="Имя начинается с большой русской буквы";
-    document.getElementById('name_help').innerHTML = exception;
-  }
-  else{
-    document.getElementById('name_help').innerHTML = '';
-  }
-  if (!validateName(surname)) {
-    exception="Фамилия начинается с большой русской буквы";
-    document.getElementById('surname_help').innerHTML = exception;
-  }
-  else{
-    document.getElementById('surname_help').innerHTML = '';
-  }
+
   if (!validatePass(pass)) {
-    exception="Пароль должен содержать как минимум одну цифру и одну большую букву";
-    document.getElementById('password_helper').innerHTML = exception;
+      exception="Пароль должен содержать одну цифру и одну большую букву";
+      $('#password_helper').text(exception);
   }
   else{
-    document.getElementById('password_helper').innerHTML = '';
+      $('#password_helper').text('');
   }
+
   if (!validateRePass(repass,pass)) {
-    exception="Пароли не совпадают";
-    document.getElementById('repassword_helper').innerHTML = exception;
+      exception="Пароли не совпадают";
+      $('#repassword_helper').text(exception);
   }
   else{
-    document.getElementById('repassword_helper').innerHTML = '';
-  }
-  if (!validateBirth(birth)) {
-    exception="Формат ввода: дд.мм.гггг";
-    document.getElementById('birth_help').innerHTML = exception;
-  }
-  else{
-    document.getElementById('birth_help').innerHTML = '';
+      $('#repassword_helper').text('');
   }
 }
 
-
-function validateName(name){
-  var re = /^[а-яА-Я'][а-яА-Я-' ]+[а-яА-Я']?$/;
-  return re.test(name);
-}
 
 function validatePassword(pass){
   if (pass=='') 
@@ -97,12 +70,6 @@ function validateRePass(repass,pass){
   if (pass==repass) 
     return true;
 }
-
-function validateBirth(birth) {
-  var reg = /^\d{2}([.])\d{2}\1\d{4}$/;
-  return reg.test(birth);
-}
-
 
 function validateNumber(pass){
   var reg = /[0-9]/;

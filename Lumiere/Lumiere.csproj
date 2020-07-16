@@ -21,6 +21,11 @@
     <Folder Include="wwwroot\img\posters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\icofont\fonts\icofont.svg" />
+    <None Include="wwwroot\lib\icofont\fonts\icofont.woff2" />
+  </ItemGroup>
+
 
 
 </Project>
