@@ -25,3 +25,17 @@ function loadTimes(select_date) {
   });
 }
 
+// Динамическое заполнение номера зала в зависимости от времени сеанса. 
+function loadRoom(select_time) {
+  var filmId = $('#film').val();
+  var date = $('#date').val();
+  var time = select_time.value;
+
+  $.ajax({
+    type: 'GET',
+    url: '/Booking/RoomNumbersList?filmId=' + filmId + '&date=' + date + '&time=' + time,
+    success: function (data) {
+      $('#roomNumber').replaceWith(data);
+    }
+  });
+}

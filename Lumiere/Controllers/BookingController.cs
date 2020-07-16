@@ -120,5 +120,31 @@ namespace Lumiere.Controllers
 
             return PartialView(times);
         }
+
+        [HttpGet]
+        public IActionResult RoomNumbersList(Guid filmId, string date, string time)
+        {
+            if (filmId == default)
+                return PartialView(new List<int>());
+
+            List<FilmSeance> seances = _seanceRepository.GetByFilmId(filmId).ToList();
+            if (seances == null)
+                return PartialView(new List<int>());
+
+            if (!DateTime.TryParse(date, out DateTime seanceDate))
+                return PartialView(new List<int>());
+
+            if (!DateTime.TryParse(time, out DateTime seanceTime))
+                return PartialView(new List<int>());
+
+            List<int> roomNumbers = new List<int>();
+            foreach (FilmSeance seance in seances)
+            {
+                if (seance.Date == seanceDate && seance.Time == seanceTime)
+                    roomNumbers.Add(seance.RoomNumber);
+            }
+
+            return PartialView(roomNumbers);
+        }
     }
 }
