@@ -1,0 +1,8 @@
+﻿@model List<DateTime>
+
+    <select id='time' class="select" onchange="loadRoom(this);">
+        @foreach(DateTime time in Model)
+        {
+            <option>@time.ToString("t")</option>
+        }
+    </select>

@@ -11,18 +11,18 @@
 
 <div class="information container w-75" id="information">
     <div id="options" class="d-flex justify-content-around">
-        <select id='film' class="select">
+        <select id='film' class="select" onchange="loadDates(this);">
             @foreach (BookingFilmViewModel bookingFilm in Model)
             {
                 <option value=@bookingFilm.FilmId>@bookingFilm.FilmName</option>
             }
         </select>
 
-        <select id='date' class="select">
+        <select id="date" class="select" onchange="loadTimes(this);">
             
         </select>
 
-        <select id='time' class="select">
+        <select id="time" class="select">
             
         </select>
     </div>

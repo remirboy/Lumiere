@@ -105,5 +105,20 @@ namespace Lumiere.Controllers
 
             return PartialView(dates);
         }
+
+        [HttpGet]
+        public IActionResult TimesList(Guid filmId, string date)
+        {
+            List<FilmSeance> seances = _seanceRepository.GetByFilmId(filmId).ToList();
+
+            List<DateTime> times = new List<DateTime>();
+            foreach (FilmSeance seance in seances)
+            {
+                if (seance.Date == DateTime.Parse(date))
+                    times.Add(seance.Time);
+            }
+
+            return PartialView(times);
+        }
     }
 }

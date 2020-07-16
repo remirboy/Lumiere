@@ -1,6 +1,6 @@
 // Динамическое заполнение дат в зависимости от фильма.
-$('#film').change(function () {
-  var filmId = $(this).val();
+function loadDates(select_film) {
+  var filmId = select_film.value;
 
   $.ajax({
     type: 'GET',
@@ -9,5 +9,19 @@ $('#film').change(function () {
       $('#date').replaceWith(data);
     }
   });
-});
+}
+
+// Динамическое заполнение времени сеансов в зависимости от даты.
+function loadTimes(select_date) {
+  var filmId = $('#film').val();
+  var date = select_date.value
+
+  $.ajax({
+    type: 'GET',
+    url: '/Booking/TimesList?filmId=' + filmId + '&date=' + date,
+    success: function (data) {
+      $('#time').replaceWith(data);
+    }
+  });
+}
 

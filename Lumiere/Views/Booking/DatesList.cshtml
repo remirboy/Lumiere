@@ -1,9 +1,9 @@
 ﻿@model List<DateTime>
 
-    <select id='date' class="select">
+    <select id="date" class="select" onchange="loadTimes(this);">
         @foreach (DateTime date in Model)
         {
-            <option>@date.ToString("m")</option>
+            <option value=@date>@date.ToString("m")</option>
         }
     </select>
 
