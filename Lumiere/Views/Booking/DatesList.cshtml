@@ -1,0 +1,9 @@
+﻿@model List<DateTime>
+
+    <select id='date' class="select">
+        @foreach (DateTime date in Model)
+        {
+            <option>@date.ToString("m")</option>
+        }
+    </select>
+

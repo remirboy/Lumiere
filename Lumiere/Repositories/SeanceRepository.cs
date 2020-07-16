@@ -57,6 +57,11 @@ namespace Lumiere.Repositories
             return filmSeance.Id;
         }
 
+        public IEnumerable<FilmSeance> GetByFilmId(Guid filmId)
+        {
+            return _context.Seances.Where(w => w.FilmId == filmId);
+        }
+
         private async Task SaveState(FilmSeance seance, EntityState state)
         {
             _context.Entry(seance).State = state;

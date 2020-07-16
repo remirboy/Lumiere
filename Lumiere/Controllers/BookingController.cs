@@ -93,5 +93,17 @@ namespace Lumiere.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult DatesList(Guid filmId)
+        {
+            List<FilmSeance> seances = _seanceRepository.GetByFilmId(filmId).ToList();
+
+            List<DateTime> dates = new List<DateTime>();
+            foreach (FilmSeance seance in seances)
+                dates.Add(seance.Date);
+
+            return PartialView(dates);
+        }
     }
 }
