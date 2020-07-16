@@ -1,6 +1,6 @@
 ﻿@model List<int>
 
-    <select id="roomNumber" class="select">
+    <select id="roomNumber" class="select" onload="loadPrice($('#roomNumber'));">
         @foreach (int roomNumber in Model)
         {
             <option value=@roomNumber>@roomNumber</option>

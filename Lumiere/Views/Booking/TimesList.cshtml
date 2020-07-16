@@ -1,6 +1,6 @@
 ﻿@model List<DateTime>
 
-    <select id='time' class="select" onchange="loadRoom(this);">
+    <select id='time' class="select" onchange="loadRoom($('#time'));">
         @foreach(DateTime time in Model)
         {
             <option value=@time>@time.ToString("t")</option>

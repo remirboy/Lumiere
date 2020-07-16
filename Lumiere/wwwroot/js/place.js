@@ -54,23 +54,12 @@ function book(){
 function sendJSON() {
 	var reservedSeats = {
 		SeatNumbers: booked,
-		RoomNumber: $('#room_number').text(),
+		RoomNumber: $('#roomNumber').val(),
 		Date: $('#date').val(),
 		Price: $('#price').text(),
 		Time: $('#time').val(),
 		FilmId: $('#film').val()
 	};
-
-	/*
-	var xhr = new XMLHttpRequest();
-	var url = "/Booking/ReservedSeats";
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-
-	var data = JSON.stringify(reservedSeat);
-	console.log(data);
-	xhr.send(data);
-	*/
 
 	$.ajax({
 		url: "/Booking/ReservedSeats/",

@@ -146,5 +146,13 @@ namespace Lumiere.Controllers
 
             return PartialView(roomNumbers);
         }
+
+        [HttpPost]
+        public int LoadPrice(FilmSeance seance)
+        {
+
+
+            return 0;
+        }
     }
 }
