@@ -78,6 +78,21 @@ url("./fonts/icofont.woff") format("woff");
   content: "\ed05";
 }
 
+.icofont-star:before
+{
+  content: "\f000";
+}
+
+.icofont-vk:before
+{
+  content: "\ed83";
+}
+
+.icofont-instagram:before
+{
+  content: "\ed46";
+}
+
 .icofont-xs
 {
   font-size: .5em;
