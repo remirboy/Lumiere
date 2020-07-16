@@ -25,11 +25,12 @@
                 <iframe width="100%" height="315" src=@Model.Trailer.Url frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <!-- right details column -->
-            <div class="col pl-4">
+            <div class="col pl-1">
                 <div class="d-flex flex-column mb-4 text-center justify-content-between">
+                    <span class="text-dark mb-3"><b>Рейтинг Кинопоиска: </b><span id="raiting"></span></span>
                     <span class="text-dark mb-3">драма, приключение, семейный</span>
                     <span class="text-dark">Формат: 2D</span>
-                    <span class="text-dark mb-5">Длительность: @Model.Duration.ToString("t")</span>
+                    <span class="text-dark mb-4">Длительность: @Model.Duration.ToString("t")</span>
                     <span class="h6">Сеансы сегодня, @DateTime.Today.ToString("m"):</span>
                     <div class="d-flex justify-content-around flex-wrap">
                         @foreach (FilmSeance seance in Model.Seances)
@@ -40,7 +41,7 @@
                             }
                         }
                     </div>
-                    <button type="button" class="btn btn-warning align-self-center mt-5">
+                    <button type="button" class="btn btn-warning align-self-center mt-4">
                         <i class="icofont-film pr-2"></i>
                         Забронировать
                     </button>
