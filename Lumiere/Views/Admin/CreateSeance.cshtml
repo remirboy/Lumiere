@@ -1,9 +1,0 @@
-﻿@model Lumiere.ViewModels.CreateSeanceViewModel
-
-<form method="post" asp-controller="Seance" asp-action="Create">
-    <input type="hidden" asp-for="FilmId"/>
-    <input type="date" asp-for="Date"/>
-    <input type="time" asp-for="Time"/>
-    <input type="number" asp-for="Price"/>
-    <input type="submit" value="Добавить" />
-</form>

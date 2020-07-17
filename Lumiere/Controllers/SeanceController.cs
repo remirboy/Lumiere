@@ -38,7 +38,8 @@ namespace Lumiere.Controllers
                 Date = model.Date,
                 Time = model.Time,
                 Price = model.Price,
-                FilmId = model.FilmId
+                FilmId = model.FilmId,
+                RoomNumber = model.RoomNumber
             };
 
             await _seanceRepository.CreateAsync(seance);

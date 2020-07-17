@@ -128,4 +128,4 @@ function f(list) {
 	});
 }
 
-//setInterval( f, 1000, list);
+setInterval( f, 1000, list);

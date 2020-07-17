@@ -91,7 +91,7 @@ namespace Lumiere.Controllers
                 await _reservedSeatRepository.CreateAsync(reservedSeat);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Profile", "User", userId);
         }
 
         [HttpGet]
