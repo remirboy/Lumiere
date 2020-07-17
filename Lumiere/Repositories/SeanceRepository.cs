@@ -45,6 +45,23 @@ namespace Lumiere.Repositories
                 .SingleOrDefaultAsync(sod => sod.Id == id);
         }
 
+        public async Task<Guid> GetIdBySeance(FilmSeance seance)
+        {
+            FilmSeance filmSeance = await _context.Seances.SingleOrDefaultAsync(sod =>
+               sod.Date == seance.Date &&
+               sod.Time == seance.Time &&
+               sod.Price == seance.Price &&
+               sod.RoomNumber == seance.RoomNumber &&
+               sod.FilmId == seance.FilmId);
+
+            return filmSeance.Id;
+        }
+
+        public IEnumerable<FilmSeance> GetByFilmId(Guid filmId)
+        {
+            return _context.Seances.Where(w => w.FilmId == filmId);
+        }
+
         private async Task SaveState(FilmSeance seance, EntityState state)
         {
             _context.Entry(seance).State = state;

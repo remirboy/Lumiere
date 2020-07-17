@@ -19,9 +19,12 @@
                         <p class="card-text h6">Дата сеанса: @reservedFilm.SeanceDate</p>
                         <p class="card-text h6">Время сеанса: @reservedFilm.SeanceTime</p>
                         <p class="card-text h6">Зал @reservedFilm.RoomNumber</p>
-                        @foreach (KeyValuePair<int, int> rowSeatNumber in reservedFilm.RowSeatNumbers)
+                        @foreach (KeyValuePair<Guid, string> seatRowNumber in reservedFilm.SeatRowNumbers)
                         {
-                            <p class="card-text h6">Ряд @rowSeatNumber.Key Место @rowSeatNumber.Value</p>
+                            <p class="card-text h6">@seatRowNumber.Value</p>
+                            <form asp-controller="Booking" asp-action="Delete" asp-route-seatId=@seatRowNumber.Key>
+                                <button type="submit"><i class="fas fa-times"></i></button>
+                            </form>
                         }
                     </div>
                 </div>
