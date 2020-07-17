@@ -1,50 +1,48 @@
-var count = 0;
+var selectedSeatsCount = 0;
 var price = 0;
 var total_price = 0;
 var booked = [];
 var blocked = [];
-var list = document.getElementsByClassName('check');
+var seats = document.getElementsByClassName('check');
 
 function takePlace(input){
-	if (input.checked==1&&count<7){
-		count+=1;
-		total_price+=price;
+	if (input.checked == 1 && selectedSeatsCount < 7){
+		selectedSeatsCount += 1;
+		total_price += price;
 		setPlace()
 		setPrice()
-		f(list)
 	}
-	if (count==7){
-		exception="Макс. кол-во билетов:7";
+	if (selectedSeatsCount == 7){
+		exception="Максимальное кол-во билетов: 7";
 		setMessage()
-		placeBlocking(list);
+		placeBlocking();
 	}
-	if (count<=7&&input.checked==0) {
-		f(list)
-		count-=1;
-		total_price-=price;
+	if (selectedSeatsCount <= 7 && input.checked == 0) {
+		selectedSeatsCount -= 1;
+		total_price -= price;
 		exception="";
 		setMessage()
 		setPlace();
 		setPrice();
-		placeOpening(list);
+		placeOpening();
 	}
 }
 
-function placeBlocking(list){
-	for (var index = 0; index < list.length; ++index) 
-    	if(list[index].checked==0)
-    		list[index].disabled=1;
+function placeBlocking(){
+	for (var index = 0; index < seats.length; ++index) 
+		if (seats[index].checked==0)
+			seats[index].disabled=1;
 }
 
-function placeOpening(list){
-	for (var index = 0; index < list.length; ++index)
+function placeOpening(){
+	for (var index = 0; index < seats.length; ++index)
 		if(!blocked.includes(index))
-			list[index].disabled=0;
+			seats[index].disabled=0;
 }
 
 function book(){
-	for (var index = 0; index < list.length; ++index) {
-    	if(list[index].checked==1) {
+	for (var index = 0; index < seats.length; ++index) {
+		if (seats[index].checked==1) {
 			booked.push(index);
 		}
 	}
@@ -75,7 +73,7 @@ function sendJSON() {
 
 
 function setPlace(){
-	document.getElementById('number').innerHTML = count;
+	document.getElementById('number').innerHTML = selectedSeatsCount;
 }
 
 function setMessage(){
@@ -88,10 +86,10 @@ function setPrice(){
 
 function block(){
 	for (var i = 0; i < blocked.length; i++) {
-		list[blocked[i]].style="background-color : #818292";
-		if (list[blocked[i]].checked == 1) {
-			list[blocked[i]].checked = 0;
-			count -= 1;
+		seats[blocked[i]].style="background-color : #818292";
+		if (seats[blocked[i]].checked == 1) {
+			seats[blocked[i]].checked = 0;
+			selectedSeatsCount -= 1;
 			total_price -= price;
 			exception="";
 			booked.splice(booked.indexOf(blocked[i]), 1);
@@ -100,44 +98,13 @@ function block(){
 			setMessage()
 		}
 	}
-	for (var index = 0; index < list.length; ++index) {
+	for (var index = 0; index < seats.length; ++index) {
 		if (!blocked.includes(index)) {
-			list[index].style = "";
-			list[index].disabled = 0;
+			seats[index].style = "";
+			seats[index].disabled = 0;
 		}
 	}
-	if (count==7){
-		placeBlocking(list);
+	if (selectedSeatsCount == 7){
+		placeBlocking();
 	}
 }
-
-function f(list) {
-	var filmSeance = {
-		RoomNumber: $('#roomNumber').val(),
-		Date: $('#date').val(),
-		Price: $('#price').text(),
-		Time: $('#time').val(),
-		FilmId: $('#film').val() 
-	}
-
-	$.ajax({
-		method: "post",
-		url: "/Booking/GetReservedSeats",
-		dataType: "json",
-		data: filmSeance,
-		success: function (data) {
-			console.log(data);
-
-			if (msg.objects.length > 0) {
-				blocked=[];
-				for (var i = 0; i < msg.objects.length; i++) {
-					blocked.push(msg.objects[i].number);
-					list[msg.objects[i].number].disabled=1;
-					block()
-				}
-			}
-		}
-	});
-}
-
-//setInterval( f, 1000, list);

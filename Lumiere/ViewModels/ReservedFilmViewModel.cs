@@ -13,6 +13,6 @@ namespace Lumiere.ViewModels
         public DateTime SeanceDate { get; set; }
         public DateTime SeanceTime { get; set; }
         public int RoomNumber { get; set; }
-        public Dictionary<int, int> RowSeatNumbers { get; set; }
+        public Dictionary<int, int> SeatRowNumbers { get; set; }
     }
 }

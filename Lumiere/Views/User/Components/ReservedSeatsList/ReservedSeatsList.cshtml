@@ -19,9 +19,9 @@
                         <p class="card-text h6">Дата сеанса: @reservedFilm.SeanceDate</p>
                         <p class="card-text h6">Время сеанса: @reservedFilm.SeanceTime</p>
                         <p class="card-text h6">Зал @reservedFilm.RoomNumber</p>
-                        @foreach (KeyValuePair<int, int> rowSeatNumber in reservedFilm.RowSeatNumbers)
+                        @foreach (KeyValuePair<int, int> seatRowNumber in reservedFilm.SeatRowNumbers)
                         {
-                            <p class="card-text h6">Ряд @rowSeatNumber.Key Место @rowSeatNumber.Value</p>
+                            <p class="card-text h6">Ряд @seatRowNumber.Value Место @seatRowNumber.Key</p>
                         }
                     </div>
                 </div>

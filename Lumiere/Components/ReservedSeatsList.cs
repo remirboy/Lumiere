@@ -46,17 +46,16 @@ namespace Lumiere.Components
                         SeanceDate = seance.Date,
                         SeanceTime = seance.Time,
                         RoomNumber = seance.RoomNumber,
-                        RowSeatNumbers = new Dictionary<int, int>() { { reservedSeat.RowNumber, reservedSeat.SeatsNumber } }
+                        SeatRowNumbers = new Dictionary<int, int>() { { reservedSeat.SeatsNumber, reservedSeat.RowNumber } }
                     };
+
+                    reservedFilms.Add(reservedFilm);
                 }
                 else
                 {
-                    reservedFilm.RowSeatNumbers.Add(reservedSeat.RowNumber, reservedSeat.SeatsNumber);
-                }
-
-                reservedFilms.Add(reservedFilm);
+                    reservedFilm.SeatRowNumbers.Add(reservedSeat.SeatsNumber, reservedSeat.RowNumber);
+                }               
             }
-
 
             return View("ReservedSeatsList", reservedFilms);
         }
