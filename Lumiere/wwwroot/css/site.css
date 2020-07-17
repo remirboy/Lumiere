@@ -88,7 +88,7 @@ button {
     left: 20px;
     width: 16px;
     height: 16px;
-    background-image: url('img/search.png');
+    background-image: url('/img/search.png');
     background-repeat: no-repeat;
     background-position: center;
     border: none;

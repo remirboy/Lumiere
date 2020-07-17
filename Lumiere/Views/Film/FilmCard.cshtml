@@ -2,7 +2,7 @@
 
     <div class="card mr-2 mb-3" style="width: 13rem;">
         <a asp-controller="Film" asp-action="Index" asp-route-id=@Model.Id >
-            <img src="" class="card-img-top" alt="movie poster">
+            <img src=@Model?.Posters?.First()?.Url class="card-img-top" alt="movie poster">
         </a>
         <div class="card-body text-center">
             <a asp-controller="Film" asp-action="Index" asp-route-id=@Model.Id >
