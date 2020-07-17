@@ -112,10 +112,22 @@ function block(){
 }
 
 function f(list) {
+	var filmSeance = {
+		RoomNumber: $('#roomNumber').val(),
+		Date: $('#date').val(),
+		Price: $('#price').text(),
+		Time: $('#time').val(),
+		FilmId: $('#film').val() 
+	}
+
 	$.ajax({
+		method: "post",
 		url: "/Booking/GetReservedSeats",
-  		dataType: "json",
-		success: function (msg) {
+		dataType: "json",
+		data: filmSeance,
+		success: function (data) {
+			console.log(data);
+
 			if (msg.objects.length > 0) {
 				blocked=[];
 				for (var i = 0; i < msg.objects.length; i++) {
@@ -128,4 +140,4 @@ function f(list) {
 	});
 }
 
-setInterval( f, 1000, list);
+//setInterval( f, 1000, list);

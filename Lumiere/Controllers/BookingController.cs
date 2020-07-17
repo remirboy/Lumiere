@@ -42,9 +42,25 @@ namespace Lumiere.Controllers
             return View(bookingFilms);
         }
 
-        public List<ReservedSeat> GetReservedSeats()
+        [HttpPost]
+        public async Task<int[]> GetReservedSeats(FilmSeance filmSeance)
         {
-            return _reservedSeatRepository.GetAll().ToList();
+            if (!ModelState.IsValid)
+                return new int[] { };
+
+
+            Guid seanceId = await _seanceRepository.GetIdBySeance(filmSeance);
+            FilmSeance seance = await _seanceRepository.GetByIdAsync(seanceId);
+            if (seance == null)
+                return new int[] { };
+
+            List<int> seatsNumber = new List<int>();
+            foreach(ReservedSeat reservedSeat in seance.ReservedSeats)
+            {
+                seatsNumber.Add(reservedSeat.SeatsNumber);
+            }
+
+            return seatsNumber.ToArray();
         }
 
         [HttpPost]
@@ -79,7 +95,7 @@ namespace Lumiere.Controllers
 
             for (int i = 0; i < reservedSeats.SeatNumbers.Length; i++)
             {
-                double rowNumber = (reservedSeats.SeatNumbers[i] + 1) / seatsCountInRow;
+                double rowNumber = ((double) reservedSeats.SeatNumbers[i] + 1) / ((double) seatsCountInRow);
                 ReservedSeat reservedSeat = new ReservedSeat
                 {
                     RowNumber = Convert.ToInt32(Math.Ceiling(rowNumber)),
@@ -163,7 +179,7 @@ namespace Lumiere.Controllers
                 return 0;
 
             List<FilmSeance> seances = _seanceRepository.GetByFilmId(filmSeance.FilmId).ToList();
-            if (filmSeance == null)
+            if (seances == null)
                 return 0;
 
             foreach(FilmSeance seance in seances)

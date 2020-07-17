@@ -21,6 +21,8 @@
     <Folder Include="wwwroot\img\posters\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 
 
 </Project>
