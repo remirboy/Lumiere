@@ -1,5 +1,6 @@
 var count = 0;
 var price = 0;
+var total_price = 0;
 var booked = [];
 var blocked = [];
 var list = document.getElementsByClassName('check');
@@ -7,7 +8,7 @@ var list = document.getElementsByClassName('check');
 function takePlace(input){
 	if (input.checked==1&&count<7){
 		count+=1;
-		price+=500;
+		total_price+=price;
 		setPlace()
 		setPrice()
 		f(list)
@@ -20,7 +21,7 @@ function takePlace(input){
 	if (count<=7&&input.checked==0) {
 		f(list)
 		count-=1;
-		price-=500;
+		total_price-=price;
 		exception="";
 		setMessage()
 		setPlace();
@@ -82,7 +83,7 @@ function setMessage(){
 }
 
 function setPrice(){
-	document.getElementById('price').innerHTML = price;
+	document.getElementById('total_price').innerHTML = total_price;
 }
 
 function block(){
@@ -90,8 +91,8 @@ function block(){
 		list[blocked[i]].style="background-color : #818292";
 		if (list[blocked[i]].checked == 1) {
 			list[blocked[i]].checked = 0;
-			count -=1;
-			price -=500;
+			count -= 1;
+			total_price -= price;
 			exception="";
 			booked.splice(booked.indexOf(blocked[i]), 1);
 			setPlace();
@@ -122,7 +123,6 @@ function f(list) {
 					list[msg.objects[i].number].disabled=1;
 					block()
 				}
-			} else {
 			}
 		}
 	});

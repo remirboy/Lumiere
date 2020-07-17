@@ -68,6 +68,7 @@ function loadPrice(select_room) {
     dataType: "json",
     success: function (data) {
       $('#price').text(data);
+        price = data;
     }
   });
 }
