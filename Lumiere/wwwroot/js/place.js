@@ -48,6 +48,7 @@ function book(){
 	}
 	sendJSON();
 	booked = [];
+	SetReservedSeats();
 }
 
 function sendJSON() {
