@@ -1,0 +1,66 @@
+﻿@model Lumiere.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<main id="container--register">
+    <div class="container w-75">
+        <!-- title -->
+        <h4 class="text-center mb-4">Регистрация</h4>
+        <hr>
+        <!-- form -->
+        <div class="d-flex justify-content-center">
+            <form class="mb-4" style="min-width: 40vw;" name="registration" method="post" id="registrationForm" asp-controller="Account" asp-action="Register">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="lastName">Фамилия</label>
+                        <input id="lastName" type="text" required class="form-control" asp-for="SecondName">
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="firstName">Имя</label>
+                        <input id="firstName" type="text" required class="form-control" asp-for="FirstName">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-5 form-group">
+                        <label for="birthDate">Дата рождения</label>
+                        <input id="birthDate" type="date" required class="form-control" asp-for="DateOfBirth">
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="emailEnter">Email</label>
+                        <input id="emailEnter" type="email" required class="form-control" placeholder="example@gmail.com"
+                               onblur="validRegistration()" asp-for="Email">
+                        <small id="email_helper" class="form-text text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col mb-0">
+                        <label for="passwordEnter">Пароль</label>
+                        <input required type="password" id="passwordEnter" placeholder="******" class="form-control" onblur="validRegistration()" asp-for="NewPassword">
+                        <small class="form-text text-muted"></small>
+                    </div>
+
+                    <div class="form-group col mb-0">
+                        <label for="passwordConfirm">Подтвердите пароль</label>
+                        <input required type="password" id="passwordConfirm" placeholder="******" class="form-control" onblur="validRegistration()" asp-for="ConfirmPassword">
+                        <small id="repassword_helper" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <small id="password_helper" class="form-text text-muted"></small>
+                </div>
+
+                <button id="registerButton" type="submit" class="btn btn-secondary mt-2">Регистрация</button>
+                <br>
+            </form>
+        </div>
+    </div>
+    <hr />
+</main>
+
+@await Html.PartialAsync("Posters")

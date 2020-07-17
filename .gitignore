@@ -12,6 +12,9 @@
 *.userosscache
 *.sln.docstates
 
+# Posters
+/Lumiere/wwwroot/img/posters
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -509,3 +512,5 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,windows,aspnetcore
+/Lumiere/Properties/serviceDependencies.json
+/Lumiere/Properties/serviceDependencies.local.json

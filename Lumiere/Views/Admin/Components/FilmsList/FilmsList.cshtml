@@ -1,0 +1,47 @@
+﻿@model List<Lumiere.Models.Film>
+
+<div class="mb-4 text-center"><span class="h5">Список фильмов</span></div>
+
+@foreach(Film film in Model) 
+{
+    <div class="card mb-3" style="max-height: 255px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <a asp-controller="Film" asp-action="Index" asp-route-id=@film.Id>
+                    <img src=@film.Posters.First().Url class="card-img" style="max-height: 250px;" alt="Постер фильма">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body pl-0">
+                    <div class="d-flex text-center mb-1">
+                        <span class="h6 card-title text-center flex-grow-1">@film.Name @film.AgeLimit+</span>
+
+                        <a class="text-info text-dark" asp-controller="Film" asp-action="Update" asp-route-id=@film.Id><i class="icofont-pencil-alt-2 ml-3"></i></a>
+                        <form method="post" asp-controller="Film" asp-action="Delete">
+                            <input type="hidden" asp-for=@film.Id name="id" />
+                            <button type="submit"><i class="icofont-ui-delete ml-1"></i></button>
+                        </form>
+                    </div>
+
+                    <div class="d-flex flex-column text-center justify-content-between mr-5 pl-3 pr-3">
+                        <span class="text-dark mb-2">драма, приключение, семейный</span>
+                        <small class="card-text text-dark">Длительность: @film.Duration</small>
+                        <small class="card-text">Формат: 2D</small>
+                        <small class="card-text pr-2 pl-2">
+                            Время сеансов сегодня:
+                            <br />
+                            @foreach (FilmSeance seance in film.Seances)
+                            {
+                                if (seance.Date == DateTime.Today)
+                                {
+                                    <span class="card-text">@seance.Time.ToString("t")</span>
+                                }
+                            }
+                        </small>
+                        <small class="card-text mt-1 text-truncate">@film.Description</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

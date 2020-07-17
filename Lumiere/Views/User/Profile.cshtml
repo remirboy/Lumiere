@@ -1,0 +1,52 @@
+﻿@model Lumiere.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<main id="container--account">
+    <div class="container w-75">
+        <div class="d-flex align-items-center mt-4 mb-4">
+            <h4 class="text-center flex-grow-1">Личный кабинет | @Model.FirstName @Model.SecondName</h4>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col col-lg-5">
+                <div class="text-center mb-4">
+                    <span class="h5">Личная информация</span>
+                    <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@Model.Id>
+                        <i class="icofont-pencil-alt-2 ml-3"></i>
+                    </a>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        @Model.SecondName
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        @Model.FirstName
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-envelope mr-2" aria-hidden="true"></i>
+                        @Model.Email
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+                        @Model.DateOfBirth.ToString("d")
+                    </li>
+                </ul>
+            </div>
+
+            <div class="scrollable col pl-4">
+                <div class="mb-4 text-center"><span class="h5">Забронированные фильмы</span></div>
+
+                @await Component.InvokeAsync("ReservedSeatsList", Model)
+
+            </div>
+        </div>
+    </div>
+    <hr />
+</main>
+
+@await Html.PartialAsync("Posters")

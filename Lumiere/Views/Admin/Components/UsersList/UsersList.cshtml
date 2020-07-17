@@ -1,0 +1,33 @@
+﻿@model List<Lumiere.Models.User>
+@inject Lumiere.Repositories.IUserRepository _userRepository
+
+<div class="mb-3 text-center"><span class="h5">Список пользователей</span></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">e-mail</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Админ</th>
+            <th scope="col">Профиль</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User user in Model)
+        {
+            <tr>
+                <td scope="row">@user.Email</td>
+                <td>@user.SecondName</td>
+                <td>@user.FirstName</td>
+                <td class="text-center">@(await _userRepository.IsInRoleAsync(user, "admin") ? "Да" : "Нет")</td> 
+                <td class="d-flex justify-content-center align-items-center border-0">
+                    <a class="text-info text-dark" asp-controller="User" asp-action="Edit" asp-route-id=@user.Id><i class="icofont-user"></i></a>
+                    <form method="post" asp-controller="User" asp-action="Delete" asp-route-id=@user.Id>
+                        <button type="submit"><i class="icofont-ui-delete"></i></button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

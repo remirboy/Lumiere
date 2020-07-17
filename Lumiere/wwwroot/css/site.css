@@ -1,71 +1,179 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿body {
+    min-width: 460px;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+header {
+    height: 100px;
+    background: #f8f9faf9;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+#container--account {
+    background: linear-gradient(0deg, #f8f9faf9 0%, rgba(226, 226, 226, 0.3) 100%);
+    padding-top: 20px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.bg-gradient {
+    background: linear-gradient(0deg, #f8f9faf9 0%, #f4f4023f 120%);
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
+#container--register {
+    background: linear-gradient(0deg, #f8f9faf9 0%, rgba(226, 226, 226, 0.3) 100%);
+    padding-top: 40px;
 }
-@media (min-width: 768px) {
-  html {
+
+.icofont-home {
+    font-size: 18px;
+}
+
+.icofont-pencil-alt-2 {
+    font-size: 16px
+}
+
+.icofont-vk {
+    font-size: 28px;
+}
+
+.scrollable {
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.posters {
+    background-color: #fdfcbe21;
+}
+
+button {
+    border: none;
+    background-color: transparent
+}
+
+#logo {
+    position: relative;
+    top: 20px;
+    left: -10px;
+    height: 135px;
+}
+
+#footer--logo {
+    position: relative;
+    top: -10px;
+    height: 75px;
+}
+
+.search {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    float: right;
+    width: 400px;
+    height: 35px;
+}
+
+    .search input {
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        padding-left: 50px;
+        background-color: #f6f6f6;
+        border-radius: 15px;
+        border: 1px solid black;
+    }
+
+.search-button {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 20px;
+    width: 16px;
+    height: 16px;
+    background-image: url('img/search.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.swiper-container {
+    width: 500px;
+    height: 250px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+    .swiper-slide img {
+        width: 100%;
+    }
+
+footer img {
+    height: 30px
+}
+
+.left-corner {
+    position: relative;
+    top: 0.5rem;
+    left: 30px
+}
+
+.right-corner {
     font-size: 16px;
-  }
+    position: relative;
+    top: 0.5rem;
+    right: 30px
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+@media (max-width: 870px) {
+    .search {
+        width: 300px;
+    }
+
+    #logo {
+        position: relative;
+        top: 20px;
+        left: -10px;
+        height: 120px;
+    }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+@media (max-width: 770px) {
+    header {
+        height: 70px;
+    }
+
+        header ul {
+            display: none
+        }
+
+    #logo {
+        height: 120px;
+    }
+
+    .search {
+        width: 215px;
+    }
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+@media (max-width: 570px) {
+    #logo {
+        height: 100px;
+    }
 }

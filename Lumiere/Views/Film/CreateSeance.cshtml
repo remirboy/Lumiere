@@ -1,0 +1,31 @@
+﻿@model Lumiere.ViewModels.CreateSeanceViewModel
+
+    <form name="registration" id="form" method="post" asp-controller="Seance" asp-action="Create" class="p-4 w-75">
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="filmID">Название фильма</label>
+                <select asp-for="FilmId" required class="form-control">
+                    <option selected>-- Выберите фильм</option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row d-flex justify-content-around">
+            <div class="form-group col-md-5">
+                <label for="sessionDate">Дата сеанса</label>
+                <input type="date" asp-for="Date" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="sessionTime col-md-3">Время</label>
+                <input type="time" asp-for="Time" required class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+                <label for="sessionTime">Цена билета</label>
+                <input type="number" asp-for="Price" required class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-5 m-auto">
+            <input type="submit" value="Добавить" required class="form-control btn btn-secondary" />
+        </div>
+    </form>

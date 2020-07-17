@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Lumiere.Data;
+using Lumiere.Models;
+using Lumiere.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +24,28 @@ namespace Lumiere
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<LumiereContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;   // минимальная длина
+                options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+                options.Password.RequireLowercase = true; // требуются ли символы в нижнем регистре
+                options.Password.RequireUppercase = true; // требуются ли символы в верхнем регистре
+                options.Password.RequireDigit = true; // требуются ли цифры
+            })
+                .AddEntityFrameworkStores<LumiereContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFilmRepository, FilmRepository>();
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
+            services.AddTransient<IReservedSeatRepository, ReservedSeatRepository>();
+            services.AddTransient<ISeanceRepository, SeanceRepository>();
+            services.AddTransient<ITrailerRepository, TrailerRepository>();
+            services.AddTransient<IPosterRepository, PosterRepository>();
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +66,7 @@ namespace Lumiere
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

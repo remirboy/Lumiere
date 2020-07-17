@@ -1,0 +1,19 @@
+﻿@model Lumiere.Models.Film
+
+    <div class="card mr-2 mb-3" style="width: 13rem;">
+        <a asp-controller="Film" asp-action="Index" asp-route-id=@Model.Id >
+            <img src="" class="card-img-top" alt="movie poster">
+        </a>
+        <div class="card-body text-center">
+            <a asp-controller="Film" asp-action="Index" asp-route-id=@Model.Id >
+                <h6 class="card-title text-body">@Model.Name</h6>
+            </a>
+
+            @foreach(FilmSeance seance in Model.Seances) {
+                if (seance.Date == DateTime.Today)
+                {
+                    <span class="card-text">@seance.Time.ToString("t")</span> 
+                }
+            }
+        </div>
+    </div>
