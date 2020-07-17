@@ -82,6 +82,13 @@ function loadPrice(select_room) {
     var time = $('#time').val();
     var room = select_room.val();
 
+    if (room == 1) {
+        $('#row_6').show();
+    }
+    else if (room == 2) {
+        $('#row_6').hide();
+    }
+
     var seance = {
         FilmId: filmId,
         Date: date,
