@@ -22,7 +22,7 @@ function SetReservedSeats() {
                 blocked = [];
                 for (var i = 0; i < data.length; i++) {
                     blocked.push(data[i] - 1);
-                    list[data[i] - 1].disabled = 1;
+                    seats[data[i] - 1].disabled = 1;
                     block()
                 }
             }

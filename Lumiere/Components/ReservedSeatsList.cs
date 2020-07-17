@@ -4,6 +4,7 @@ using Lumiere.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Lumiere.Components
@@ -46,14 +47,14 @@ namespace Lumiere.Components
                         SeanceDate = seance.Date,
                         SeanceTime = seance.Time,
                         RoomNumber = seance.RoomNumber,
-                        SeatRowNumbers = new Dictionary<int, int>() { { reservedSeat.SeatsNumber, reservedSeat.RowNumber } }
+                        SeatRowNumbers = new Dictionary<Guid, string>() { { reservedSeat.Id, $"ряд {reservedSeat.RowNumber} место {reservedSeat.SeatsNumber}" } }
                     };
 
                     reservedFilms.Add(reservedFilm);
                 }
                 else
                 {
-                    reservedFilm.SeatRowNumbers.Add(reservedSeat.SeatsNumber, reservedSeat.RowNumber);
+                    reservedFilm.SeatRowNumbers.Add(reservedSeat.Id, $"ряд {reservedSeat.RowNumber} место {reservedSeat.SeatsNumber}");
                 }               
             }
 

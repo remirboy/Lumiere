@@ -110,6 +110,26 @@ namespace Lumiere.Controllers
             return RedirectToAction("Profile", "User", userId);
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(Guid seatId)
+        {
+            if (seatId == default)
+                return NotFound();
+
+            ReservedSeat reservedSeat = await _reservedSeatRepository.GetByIdAsync(seatId);
+            if (reservedSeat == null)
+                return NotFound();
+
+            await _reservedSeatRepository.DeleteAsync(reservedSeat);
+
+            string userId = await _userRepository.GetCurrentUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Profile", "User", new { id = userId });
+        }
+
         [HttpGet]
         public IActionResult DatesList(Guid filmId)
         {

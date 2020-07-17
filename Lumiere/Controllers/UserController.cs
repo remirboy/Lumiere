@@ -84,7 +84,7 @@ namespace Lumiere.Controllers
 
             IdentityResult result =  await _userRepository.UpdateAsync(user);
             if (result.Succeeded)
-                return View("Profile", user);
+                return View("Profile", user.Id);
 
             foreach (var error in result.Errors)
                 ModelState.AddModelError(string.Empty, error.Description);
